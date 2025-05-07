@@ -1,0 +1,72 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { 
+	title = 'Ian Redzio | Desarrollador web', 
+	description = 'Portfolio personal de Ian Redzio, desarrollador web especializado en crear aplicaciones web modernas y accesibles.' 
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<title>{title}</title>
+		<!-- Fuente Inter de Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+		<style>
+			:root {
+				--color-primary: #0E0E29;
+				--color-primary-dark: #080818;
+			}
+			
+			body {
+				background-color: #0E0E29;
+				color: #FFFFFF;
+				font-family: 'Inter', sans-serif;
+				margin: 0;
+				padding: 0;
+				min-height: 100vh;
+			}
+
+			body::before {
+				content: '';
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				pointer-events: none;
+				z-index: -1;
+				background-image: 
+					radial-gradient(circle at 20% 35%, rgba(28, 28, 70, 0.4) 0%, transparent 50%),
+					radial-gradient(circle at 75% 44%, rgba(33, 36, 41, 0.4) 0%, transparent 40%);
+			}
+		</style>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		scroll-behavior: smooth;
+	}
+</style>

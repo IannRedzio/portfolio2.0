@@ -1,0 +1,74 @@
+---
+interface Props {
+  text: string;
+  speed?: number;
+  startDelay?: number;
+  cursorBlinkDelay?: number;
+  className?: string;
+}
+
+const { 
+  text, 
+  speed = 120,
+  startDelay = 300,
+  cursorBlinkDelay = 500,
+  className = "text-5xl md:text-6xl font-bold mb-8 text-white"
+} = Astro.props;
+---
+
+<div class="typewriter-container">
+  <h1 class={className}>
+    <span id="typewriter-text"></span>
+    <span id="typewriter-cursor" class="cursor">|</span>
+  </h1>
+</div>
+
+<style>
+  .cursor {
+    font-weight: 100;
+    color: white;
+    animation: blink-animation 1s step-end infinite;
+  }
+
+  .cursor-stop {
+    display: none;
+  }
+
+  @keyframes blink-animation {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+</style>
+
+<script define:vars={{ text, speed, startDelay, cursorBlinkDelay }}>
+  // Función para simular la escritura letra por letra
+  function typeText() {
+    const textElement = document.getElementById('typewriter-text');
+    const cursorElement = document.getElementById('typewriter-cursor');
+    const targetText = text;
+    let index = 0;
+
+    // Iniciar la animación después del retraso inicial
+    setTimeout(() => {
+      // Función para agregar caracteres uno por uno
+      function addCharacter() {
+        if (index < targetText.length) {
+          textElement.textContent += targetText.charAt(index);
+          index++;
+          setTimeout(addCharacter, speed);
+        } else {
+          // Hacer que el cursor desaparezca después de terminar de escribir
+          setTimeout(() => {
+            cursorElement.classList.add('cursor-stop');
+          }, cursorBlinkDelay);
+        }
+      }
+      
+      // Iniciar la adición de caracteres
+      addCharacter();
+    }, startDelay);
+  }
+
+  // Ejecutar cuando el DOM esté cargado
+  document.addEventListener('DOMContentLoaded', typeText);
+</script> 

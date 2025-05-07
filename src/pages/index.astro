@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+
+const heroData = {
+	name: "Ian Redzio",
+	title: "Desarollador Full Stack",
+	description: "Especializado en el desarrollo de aplicaciones web solidas y reutilizables.",
+	location: "de Buenos aires, Argentina 🇦🇷",
+	profileImage: "https://via.placeholder.com/150",
+};
+---
+
+<Layout title="Ian Redzio | Desarrollador Web">
+	<main>
+		<Nav />
+		<Hero />
+	</main>
+</Layout>

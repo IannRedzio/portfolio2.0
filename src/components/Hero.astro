@@ -1,0 +1,39 @@
+---
+import Button from './Button.astro';
+import EmailIcon from '../icons/EmailIcon.astro';
+import LinkedinIcon from '../icons/LinkedinIcon.astro';
+import TypewriterText from './TypewriterText.astro';
+---
+
+<section class="min-h-screen flex flex-col justify-center py-16" style="background-color: #0E0E29;">
+  <div class="max-w-5xl mx-auto px-4 lg:px-0">
+    <!-- Encabezado y descripción -->
+    <div class="mb-10">
+      <TypewriterText 
+        text="Hey, soy Ian Redzio" 
+        speed={120}
+        startDelay={400}
+        cursorBlinkDelay={800}
+      />
+      
+      <div class="space-y-3 text-lg md:text-xl text-white/90">
+        <p class="leading-relaxed">
+          +3 años de experiencia. <span class="text-yellow-300 font-medium">Desarrollador Full Stack</span> de Buenos Aires, Argentina <span class="ml-1">🇦🇷</span>
+        </p>
+        <!-- <p class="text-white/80">Especializado en el desarrollo de aplicaciones web solidas y reutilizables.</p> -->
+      </div>
+    </div>
+    
+    <!-- Botones de acción -->
+    <div class="flex flex-wrap gap-4">
+      <Button href="mailto:ianredzio13@gmail.com"> 
+        <span class="mr-2"><EmailIcon /></span>
+        Contáctame
+      </Button>
+      <Button href="https://linkedin.com/in/ian-redzio" variant="outline">
+        <span class="mr-2"><LinkedinIcon /></span>
+        LinkedIn
+      </Button>
+    </div>
+  </div>
+</section> 

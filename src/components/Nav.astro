@@ -1,0 +1,39 @@
+---
+// Define la estructura de los enlaces del menú
+interface MenuItem {
+  name: string;
+  url: string;
+}
+
+// Lista de enlaces para la navegación
+const menuItems: MenuItem[] = [
+  { name: 'Experiencia', url: '#experiencia' },
+  { name: 'Proyectos', url: '#proyectos' },
+  { name: 'Sobre mí', url: '#sobre-mi' },
+  { name: 'Contacto', url: '#contacto' },
+];
+---
+
+<!-- Componente de navegación principal -->
+<header class="absolute top-0 left-0 right-0 z-10">
+  <nav class="w-full py-7 px-4 lg:px-8">
+    <div class="max-w-5xl mx-auto flex justify-center md:justify-end items-center gap-8">
+      {
+        menuItems.map((item) => (
+          <a
+            href={item.url}
+            class="text-white/70 hover:text-white transition-colors text-sm md:text-base font-medium tracking-wide"
+          >
+            {item.name}
+          </a>
+        ))
+      }
+      <!-- Icono de pantalla completa -->
+      <a href="#" class="p-1 opacity-80 hover:opacity-100 transition-opacity" aria-label="Vista de pantalla completa">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
+        </svg>
+      </a>
+    </div>
+  </nav>
+</header> 
