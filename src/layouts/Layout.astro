@@ -13,7 +13,15 @@ const {
 	description = 'Portfolio personal de Ian Redzio, desarrollador web especializado en crear aplicaciones web modernas y accesibles.' 
 } = Astro.props;
 
-const isLocalhost = isLocalEnvironment(Astro.url);
+// Detección del entorno - enfoque más directo
+const hostname = Astro.url.hostname;
+const isProduction = hostname.includes('vercel.app');
+const isLocalhost = !isProduction && (hostname === 'localhost' || hostname === '127.0.0.1');
+
+// Para depuración
+console.log('Hostname actual:', hostname);
+console.log('¿Es producción?', isProduction);
+console.log('¿Es localhost?', isLocalhost);
 ---
 
 <!doctype html>
@@ -58,12 +66,24 @@ const isLocalhost = isLocalEnvironment(Astro.url);
 					radial-gradient(circle at 75% 44%, rgba(33, 36, 41, 0.4) 0%, transparent 40%);
 			}
 		</style>
+		<script>
+			// Script para mostrar información de depuración en la consola del navegador
+			console.log('URL hostname:', window.location.hostname);
+			console.log('¿Contiene vercel.app?', window.location.hostname.includes('vercel.app'));
+		</script>
 	</head>
 	<body>
 		{isLocalhost ? (
 			<slot />
 		) : (
 			<UnderConstruction />
+		)}
+		
+		{/* Elemento para depuración visible solo en producción */}
+		{isProduction && (
+			<div style="position: fixed; bottom: 10px; right: 10px; background: black; color: white; padding: 5px; font-size: 10px; z-index: 9999;">
+				Host: {hostname} | Prod: {isProduction.toString()} | Local: {isLocalhost.toString()}
+			</div>
 		)}
 	</body>
 </html>
