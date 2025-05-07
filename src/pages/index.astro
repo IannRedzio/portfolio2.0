@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
+import { isLocalEnvironment } from '../utils/environment';
 
 const heroData = {
 	name: "Ian Redzio",
@@ -10,9 +11,17 @@ const heroData = {
 	location: "de Buenos aires, Argentina 🇦🇷",
 	profileImage: "https://via.placeholder.com/150",
 };
+
+const isLocal = isLocalEnvironment(Astro.url);
+const hostname = Astro.url.hostname;
 ---
 
 <Layout title="Ian Redzio | Desarrollador Web">
+	<div class="fixed top-0 left-0 bg-black/80 text-white text-xs p-2 z-50 rounded-br-md">
+		Entorno: {hostname} <br />
+		<!-- isLocalEnvironment: {isLocal ? "true" : "false"} -->
+	</div>
+
 	<main>
 		<Nav />
 		<Hero />

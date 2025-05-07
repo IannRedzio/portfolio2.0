@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import UnderConstruction from '../components/UnderConstruction.astro';
+import { isLocalEnvironment } from '../utils/environment';
 
 interface Props {
 	title?: string;
@@ -10,6 +12,8 @@ const {
 	title = 'Ian Redzio | Desarrollador web', 
 	description = 'Portfolio personal de Ian Redzio, desarrollador web especializado en crear aplicaciones web modernas y accesibles.' 
 } = Astro.props;
+
+const isLocalhost = isLocalEnvironment(Astro.url);
 ---
 
 <!doctype html>
@@ -56,7 +60,11 @@ const {
 		</style>
 	</head>
 	<body>
-		<slot />
+		{isLocalhost ? (
+			<slot />
+		) : (
+			<UnderConstruction />
+		)}
 	</body>
 </html>
 
