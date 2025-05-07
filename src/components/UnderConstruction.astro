@@ -1,12 +1,70 @@
+---
+// Componente para mostrar la página "Sitio en proceso"
+---
 
-<div class="min-h-screen flex flex-col items-center justify-center bg-primary text-white">
-  <div class="text-center p-8 max-w-md mx-auto">
-    <div class="text-6xl mb-6 opacity-90">🛠️</div>
-    <h1 class="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 text-transparent bg-clip-text">
-      Sitio en proceso
-    </h1>
-    <p class="text-white/70 text-lg">
-      Estamos trabajando para brindarte una mejor experiencia.
-    </p>
-  </div>
-</div> 
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sitio en proceso | Ian Redzio</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', system-ui, sans-serif;
+        background-color: #0E0E29;
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .container {
+        text-align: center;
+        padding: 2rem;
+        max-width: 28rem;
+        margin: 0 auto;
+      }
+      
+      .emoji {
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+        opacity: 0.9;
+      }
+      
+      h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0.8));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      
+      p {
+        font-size: 1.125rem;
+        line-height: 1.7;
+        color: rgba(255,255,255,0.7);
+      }
+      
+      @media (min-width: 768px) {
+        h1 {
+          font-size: 2.25rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="emoji">🛠️</div>
+      <h1>Sitio en proceso</h1>
+      <p>Estamos trabajando para brindarte una mejor experiencia.</p>
+    </div>
+    <script>
+      console.log('UnderConstruction component rendered');
+      console.log('URL:', window.location.href);
+    </script>
+  </body>
+</html> 

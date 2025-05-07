@@ -2,34 +2,32 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
-import { isLocalEnvironment } from '../utils/environment';
+import UnderConstruction from '../components/UnderConstruction.astro';
 
-const heroData = {
-	name: "Ian Redzio",
-	title: "Desarollador Full Stack",
-	description: "Especializado en el desarrollo de aplicaciones web solidas y reutilizables.",
-	location: "de Buenos aires, Argentina 🇦🇷",
-	profileImage: "https://via.placeholder.com/150",
-};
-
-const isLocal = isLocalEnvironment(Astro.url);
+// Detección directa de entorno
 const hostname = Astro.url.hostname;
-const isProduction = !isLocal;
-const environmentLabel = isLocal ? "localhost" : "producción";
+const isProduction = hostname.includes('vercel.app');
+const isLocalhost = !isProduction && (hostname === 'localhost' || hostname === '127.0.0.1');
+
+console.log('INDEX.ASTRO - Detección de entorno:');
+console.log('Hostname:', hostname);
+console.log('¿Es producción?', isProduction);
+console.log('¿Es localhost?', isLocalhost);
 ---
 
-<Layout title="Ian Redzio | Desarrollador Web">
-	{isLocal && (
+{isProduction ? (
+	<UnderConstruction />
+) : (
+	<Layout title="Ian Redzio | Desarrollador Web">
+		{/* Capa de depuración */}
 		<div class="fixed top-0 left-0 bg-black/80 text-white text-xs p-2 z-50 rounded-br-md">
 			Entorno: {hostname} <br />
-			isLocalEnvironment: {isLocal ? "true" : "false"}
+			isProduction: {isProduction.toString()}
 		</div>
-	)}
 
-	<main>
-		<Nav />
-		
-		<Hero />
-		
-	</main>
-</Layout>
+		<main>
+			<Nav />
+			<Hero />
+		</main>
+	</Layout>
+)}
