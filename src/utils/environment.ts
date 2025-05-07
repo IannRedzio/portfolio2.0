@@ -11,7 +11,7 @@ export function isLocalEnvironment(url: URL): boolean {
   const hostname = url.hostname;
   
   // Verificación explícita para el dominio de producción
-  if (hostname === 'ianredzio-portfolio.vercel.app' || 
+  if (hostname == 'ianredzio-portfolio.vercel.app' || 
       hostname.includes('vercel.app')) {
     console.log("Detectado entorno de producción:", hostname);
     return false;
