@@ -15,7 +15,7 @@ const {
 
 // Detección del entorno - enfoque más directo
 const hostname = Astro.url.hostname;
-const isProduction = hostname.includes('vercel.app');
+const isProduction = hostname === 'ianredzio-portfolio.vercel.app' || hostname.includes('vercel.app');
 const isLocalhost = !isProduction && (hostname === 'localhost' || hostname === '127.0.0.1');
 
 // Para depuración

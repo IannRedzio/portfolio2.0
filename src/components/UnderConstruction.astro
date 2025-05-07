@@ -21,6 +21,20 @@
         justify-content: center;
       }
       
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        pointer-events: none;
+        background: 
+          radial-gradient(circle at 20% 35%, rgba(28, 28, 70, 0.4) 0%, transparent 50%),
+          radial-gradient(circle at 75% 44%, rgba(33, 36, 41, 0.4) 0%, transparent 40%);
+      }
+      
       .container {
         text-align: center;
         padding: 2rem;
