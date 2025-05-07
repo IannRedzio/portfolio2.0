@@ -10,7 +10,14 @@
 export function isLocalEnvironment(url: URL): boolean {
   const hostname = url.hostname;
   
-  const localHostnames = ['localhost', '127.0.0.1'];
+  // Verificación explícita para el dominio de producción
+  if (hostname === 'ianredzio-portfolio.vercel.app' || 
+      hostname.includes('vercel.app')) {
+    console.log("Detectado entorno de producción:", hostname);
+    return false;
+  }
   
+  // Lista de hostnames locales conocidos
+  const localHostnames = ['localhost', '127.0.0.1'];
   return localHostnames.includes(hostname);
 } 
