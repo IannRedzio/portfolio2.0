@@ -6,8 +6,8 @@ import UnderConstruction from '../components/UnderConstruction.astro';
 
 // Detección directa de entorno
 const hostname = Astro.url.hostname;
-const isProduction = hostname === 'ianredzio-portfolio.vercel.app' || hostname.includes('vercel.app');
-const isLocalhost = !isProduction && (hostname === 'localhost' || hostname === '127.0.0.1');
+const isProduction = hostname == 'ianredzio-portfolio.vercel.app' || hostname.includes('vercel.app');
+const isLocalhost = !isProduction && (hostname == 'localhost' || hostname == '127.0.0.1');
 
 console.log('INDEX.ASTRO - Detección de entorno:');
 console.log('Hostname:', hostname);
