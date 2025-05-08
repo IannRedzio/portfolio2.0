@@ -2,15 +2,22 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
+import UnderConstruction from '../components/UnderConstruction.astro';
 
-// Información de depuración
+// Detección de entorno para renderizado directo
 const hostname = Astro.url.hostname;
+const isProduction = hostname.includes('vercel.app');
 console.log('INDEX.ASTRO - Hostname:', hostname);
+console.log('INDEX.ASTRO - ¿Es producción?', isProduction);
 ---
 
-<Layout title="Ian Redzio | Desarrollador Web">
-	<main>
-		<Nav />
-		<Hero />
-	</main>
-</Layout>
+{isProduction ? (
+	<UnderConstruction />
+) : (
+	<Layout title="Ian Redzio | Desarrollador Web">
+		<main>
+			<Nav />
+			<Hero />
+		</main>
+	</Layout>
+)}

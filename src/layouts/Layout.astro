@@ -13,10 +13,10 @@ const {
 	description = 'Portfolio personal de Ian Redzio, desarrollador web especializado en crear aplicaciones web modernas y accesibles.' 
 } = Astro.props;
 
-// Detección inicial en el servidor (esto se reemplazará por la detección en el cliente)
+// Detección del entorno en el servidor
 const hostname = Astro.url.hostname;
-let isProduction = hostname == 'ianredzio-portfolio.vercel.app' || hostname.includes('vercel.app');
-let isLocalhost = !isProduction && (hostname == 'localhost' || hostname == '127.0.0.1');
+const isProduction = hostname.includes('vercel.app');
+const isLocalhost = !isProduction && (hostname === 'localhost' || hostname === '127.0.0.1');
 
 // Para depuración
 console.log('SERVER - Hostname actual:', hostname);
@@ -24,76 +24,73 @@ console.log('SERVER - ¿Es producción?', isProduction);
 console.log('SERVER - ¿Es localhost?', isLocalhost);
 ---
 
-<!doctype html>
-<html lang="es" class="scroll-smooth">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description} />
-		<title>{title}</title>
-		<!-- Fuente Inter de Google Fonts -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-		<style>
-			:root {
-				--color-primary: #0E0E29;
-				--color-primary-dark: #080818;
-			}
-			
-			body {
-				background-color: #0E0E29;
-				color: #FFFFFF;
-				font-family: 'Inter', sans-serif;
-				margin: 0;
-				padding: 0;
-				min-height: 100vh;
-			}
+{isProduction ? (
+  <UnderConstruction />
+) : (
+  <!doctype html>
+  <html lang="es" class="scroll-smooth">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      <meta name="generator" content={Astro.generator} />
+      <meta name="description" content={description} />
+      <title>{title}</title>
+      <!-- Fuente Inter de Google Fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <style>
+        :root {
+          --color-primary: #0E0E29;
+          --color-primary-dark: #080818;
+        }
+        
+        body {
+          background-color: #0E0E29;
+          color: #FFFFFF;
+          font-family: 'Inter', sans-serif;
+          margin: 0;
+          padding: 0;
+          min-height: 100vh;
+        }
 
-			body::before {
-				content: '';
-				position: fixed;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				left: 0;
-				pointer-events: none;
-				z-index: -1;
-				background-image: 
-					radial-gradient(circle at 20% 35%, rgba(28, 28, 70, 0.4) 0%, transparent 50%),
-					radial-gradient(circle at 75% 44%, rgba(33, 36, 41, 0.4) 0%, transparent 40%);
-			}
-		</style>
-		<script>
-			// Script para detección del entorno en el cliente (navegador)
-			const clientHostname = window.location.hostname;
-			const isClientProduction = clientHostname == 'ianredzio-portfolio.vercel.app' || clientHostname.includes('vercel.app');
-			const isClientLocalhost = !isClientProduction && (clientHostname == 'localhost' || clientHostname == '127.0.0.1');
-			
-			console.log('CLIENTE - URL hostname:', clientHostname);
-			console.log('CLIENTE - ¿Es producción?', isClientProduction);
-			console.log('CLIENTE - ¿Es localhost?', isClientLocalhost);
-			
-			// Si estamos en producción, redirigir a la página "en construcción"
-			if (isClientProduction) {
-				// Solo redirigir si no estamos ya en la página de construcción
-				if (!window.location.pathname.includes('/under-construction')) {
-					window.location.href = '/under-construction';
-				}
-			}
-		</script>
-	</head>
-	<body>
-		<slot />
-		
-		{/* Elemento para depuración visible */}
-		<div style="position: fixed; bottom: 10px; right: 10px; background: black; color: white; padding: 5px; font-size: 10px; z-index: 9999;">
-			Host: {hostname} | Prod: {isProduction.toString()} | Local: {isLocalhost.toString()}
-		</div>
-	</body>
-</html>
+        body::before {
+          content: '';
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          pointer-events: none;
+          z-index: -1;
+          background-image: 
+            radial-gradient(circle at 20% 35%, rgba(28, 28, 70, 0.4) 0%, transparent 50%),
+            radial-gradient(circle at 75% 44%, rgba(33, 36, 41, 0.4) 0%, transparent 40%);
+        }
+      </style>
+      <script>
+        // Script para verificación adicional del lado del cliente
+        const clientHostname = window.location.hostname;
+        console.log('CLIENTE - URL hostname:', clientHostname);
+        console.log('CLIENTE - ¿Contiene vercel.app?', clientHostname.includes('vercel.app'));
+        
+        // Verificación de seguridad adicional para garantizar redirección
+        if (clientHostname.includes('vercel.app') && !window.location.pathname.includes('under-construction')) {
+          window.location.href = '/under-construction';
+        }
+      </script>
+    </head>
+    <body>
+      <slot />
+      
+      {/* Elemento para depuración visible */}
+      <div style="position: fixed; bottom: 10px; right: 10px; background: black; color: white; padding: 5px; font-size: 10px; z-index: 9999;">
+        Host: {hostname} | Entorno: {isProduction ? 'Producción' : 'Desarrollo'}
+      </div>
+    </body>
+  </html>
+)}
 
 <style is:global>
 	html,
