@@ -13,15 +13,15 @@ const {
 	description = 'Portfolio personal de Ian Redzio, desarrollador web especializado en crear aplicaciones web modernas y accesibles.' 
 } = Astro.props;
 
-// Detección del entorno - enfoque más directo
+// Detección inicial en el servidor (esto se reemplazará por la detección en el cliente)
 const hostname = Astro.url.hostname;
-const isProduction = hostname == 'ianredzio-portfolio.vercel.app' || hostname.includes('vercel.app');
-const isLocalhost = !isProduction && (hostname == 'localhost' || hostname == '127.0.0.1');
+let isProduction = hostname == 'ianredzio-portfolio.vercel.app' || hostname.includes('vercel.app');
+let isLocalhost = !isProduction && (hostname == 'localhost' || hostname == '127.0.0.1');
 
 // Para depuración
-console.log('Hostname actual:', hostname);
-console.log('¿Es producción?', isProduction);
-console.log('¿Es localhost?', isLocalhost);
+console.log('SERVER - Hostname actual:', hostname);
+console.log('SERVER - ¿Es producción?', isProduction);
+console.log('SERVER - ¿Es localhost?', isLocalhost);
 ---
 
 <!doctype html>
@@ -67,24 +67,31 @@ console.log('¿Es localhost?', isLocalhost);
 			}
 		</style>
 		<script>
-			// Script para mostrar información de depuración en la consola del navegador
-			console.log('URL hostname:', window.location.hostname);
-			console.log('¿Contiene vercel.app?', window.location.hostname.includes('vercel.app'));
+			// Script para detección del entorno en el cliente (navegador)
+			const clientHostname = window.location.hostname;
+			const isClientProduction = clientHostname == 'ianredzio-portfolio.vercel.app' || clientHostname.includes('vercel.app');
+			const isClientLocalhost = !isClientProduction && (clientHostname == 'localhost' || clientHostname == '127.0.0.1');
+			
+			console.log('CLIENTE - URL hostname:', clientHostname);
+			console.log('CLIENTE - ¿Es producción?', isClientProduction);
+			console.log('CLIENTE - ¿Es localhost?', isClientLocalhost);
+			
+			// Si estamos en producción, redirigir a la página "en construcción"
+			if (isClientProduction) {
+				// Solo redirigir si no estamos ya en la página de construcción
+				if (!window.location.pathname.includes('/under-construction')) {
+					window.location.href = '/under-construction';
+				}
+			}
 		</script>
 	</head>
 	<body>
-		{isLocalhost ? (
-			<slot />
-		) : (
-			<UnderConstruction />
-		)}
+		<slot />
 		
-		{/* Elemento para depuración visible solo en producción */}
-		{isProduction && (
-			<div style="position: fixed; bottom: 10px; right: 10px; background: black; color: white; padding: 5px; font-size: 10px; z-index: 9999;">
-				Host: {hostname} | Prod: {isProduction.toString()} | Local: {isLocalhost.toString()}
-			</div>
-		)}
+		{/* Elemento para depuración visible */}
+		<div style="position: fixed; bottom: 10px; right: 10px; background: black; color: white; padding: 5px; font-size: 10px; z-index: 9999;">
+			Host: {hostname} | Prod: {isProduction.toString()} | Local: {isLocalhost.toString()}
+		</div>
 	</body>
 </html>
 

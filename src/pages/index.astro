@@ -2,32 +2,15 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
-import UnderConstruction from '../components/UnderConstruction.astro';
 
-// Detección directa de entorno
+// Información de depuración
 const hostname = Astro.url.hostname;
-const isProduction = hostname == 'ianredzio-portfolio.vercel.app' || hostname.includes('vercel.app');
-const isLocalhost = !isProduction && (hostname == 'localhost' || hostname == '127.0.0.1');
-
-console.log('INDEX.ASTRO - Detección de entorno:');
-console.log('Hostname:', hostname);
-console.log('¿Es producción?', isProduction);
-console.log('¿Es localhost?', isLocalhost);
+console.log('INDEX.ASTRO - Hostname:', hostname);
 ---
 
-{isProduction ? (
-	<UnderConstruction />
-) : (
-	<Layout title="Ian Redzio | Desarrollador Web">
-		{/* Capa de depuración */}
-		<div class="fixed top-0 left-0 bg-black/80 text-white text-xs p-2 z-50 rounded-br-md">
-			Entorno: {hostname} <br />
-			isProduction: {isProduction.toString()}
-		</div>
-
-		<main>
-			<Nav />
-			<Hero />
-		</main>
-	</Layout>
-)}
+<Layout title="Ian Redzio | Desarrollador Web">
+	<main>
+		<Nav />
+		<Hero />
+	</main>
+</Layout>
