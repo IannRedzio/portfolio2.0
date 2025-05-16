@@ -1,12 +1,11 @@
 ---
-// Define la estructura de los enlaces del menú
 interface MenuItem {
   name: string;
   url: string;
 }
 
-// Lista de enlaces para la navegación
 const menuItems: MenuItem[] = [
+  { name: 'Inicio', url: '#inicio' },
   { name: 'Experiencia', url: '#experiencia' },
   { name: 'Proyectos', url: '#proyectos' },
   { name: 'Sobre mí', url: '#sobre-mi' },
@@ -14,21 +13,20 @@ const menuItems: MenuItem[] = [
 ];
 ---
 
-<!-- Componente de navegación principal -->
-<header class="absolute top-0 left-0 right-0 z-10">
-  <nav class="w-full py-7 px-4 lg:px-8">
-    <div class="max-w-5xl mx-auto flex justify-center md:justify-end items-center gap-8">
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#0E0E29]/90 backdrop-blur-sm h-[var(--nav-height)]">
+  <nav class="w-full h-full flex items-center px-4 lg:px-8">
+    <div class="max-w-5xl mx-auto w-full flex justify-center md:justify-end items-center gap-8">
       {
         menuItems.map((item) => (
           <a
             href={item.url}
             class="text-white/70 hover:text-white transition-colors text-sm md:text-base font-medium tracking-wide"
+            data-nav-link
           >
             {item.name}
           </a>
         ))
       }
-      <!-- Icono de pantalla completa -->
       <a href="#" class="p-1 opacity-80 hover:opacity-100 transition-opacity" aria-label="Vista de pantalla completa">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
@@ -36,4 +34,66 @@ const menuItems: MenuItem[] = [
       </a>
     </div>
   </nav>
-</header> 
+</header>
+
+<script>
+  // Script para manejar la navegación
+  document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('[data-nav-link]');
+    const mainContainer = document.getElementById('main-container');
+    
+    const updateActiveLink = () => {
+      if (!mainContainer) return;
+      
+      const scrollPosition = mainContainer.scrollTop;
+      const sections = document.querySelectorAll('.fullpage-section');
+      
+      sections.forEach((section) => {
+        const sectionEl = section as HTMLElement;
+        const sectionTop = sectionEl.offsetTop;
+        const sectionHeight = sectionEl.offsetHeight;
+        const sectionId = section.id;
+        
+        if (scrollPosition >= sectionTop - 100 && 
+            scrollPosition < sectionTop + sectionHeight - 100) {
+          
+          navLinks.forEach(link => {
+            link.classList.remove('text-white');
+            link.classList.add('text-white/70');
+          });
+          
+          const activeLink = document.querySelector(`[data-nav-link][href="#${sectionId}"]`);
+          if (activeLink) {
+            activeLink.classList.remove('text-white/70');
+            activeLink.classList.add('text-white');
+          }
+        }
+      });
+    };
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href')?.substring(1);
+        
+        if (targetId && mainContainer) {
+          const targetSection = document.getElementById(targetId);
+          
+          if (targetSection) {
+            // Hacer scroll al elemento de destino
+            mainContainer.scrollTo({
+              top: (targetSection as HTMLElement).offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+    
+    if (mainContainer) {
+      mainContainer.addEventListener('scroll', updateActiveLink);
+      
+      setTimeout(updateActiveLink, 200);
+    }
+  });
+</script> 

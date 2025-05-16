@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
+import Experience from '../components/Experience.astro';
 import UnderConstruction from '../components/UnderConstruction.astro';
 
 // Detección de entorno para renderizado directo
@@ -15,9 +16,119 @@ console.log('INDEX.ASTRO - ¿Es producción?', isProduction);
 	<UnderConstruction />
 ) : (
 	<Layout title="Ian Redzio | Desarrollador Web">
-		<main>
-			<Nav />
-			<Hero />
+		<Nav />
+		<main id="main-container" class="fullpage-container">
+			<div id="inicio" class="fullpage-section">
+				<Hero />
+			</div>
+			<div id="experiencia" class="fullpage-section">
+				<Experience />
+			</div>
 		</main>
 	</Layout>
 )}
+
+<script>
+	window.addEventListener('load', function() {
+		const mainContainer = document.getElementById('main-container');
+		const body = document.body;
+		
+		if (mainContainer) {
+			mainContainer.scrollTop = 0;
+			
+			setTimeout(() => {
+				body.classList.add('loaded');
+				
+				mainContainer.scrollTop = 0;
+			}, 100);
+		}
+	});
+	
+	if (window.location.hash) {
+		window.location.hash = '';
+	}
+
+	document.addEventListener('DOMContentLoaded', function() {
+		const mainContainer = document.getElementById('main-container');
+		if (!mainContainer) return;
+		
+		let isScrolling = false;
+		let startY = 0;
+		let currentSection = 0;
+		const sections = document.querySelectorAll('.fullpage-section');
+		
+		const goToSection = (index: number) => {
+			if (index >= 0 && index < sections.length) {
+				isScrolling = true;
+				currentSection = index;
+				
+				const targetSection = sections[index];
+				const targetTop = (targetSection as HTMLElement).offsetTop;
+				
+				mainContainer.scrollTo({
+					top: targetTop,
+					behavior: 'smooth'
+				});
+				
+				if (targetSection.id) {
+					history.replaceState(null, '', `#${targetSection.id}`);
+				}
+				
+				setTimeout(() => {
+					isScrolling = false;
+				}, 800);
+			}
+		};
+		
+		mainContainer.addEventListener('wheel', function(e) {
+			if (isScrolling) {
+				e.preventDefault();
+				return;
+			}
+			
+			const delta = e.deltaY;
+			if (delta > 0) {
+				goToSection(currentSection + 1);
+			} else {
+				goToSection(currentSection - 1);
+			}
+			
+			e.preventDefault();
+		}, { passive: false });
+		
+		mainContainer.addEventListener('touchstart', (e) => {
+			startY = e.touches[0].clientY;
+		}, { passive: true });
+		
+		mainContainer.addEventListener('touchend', (e) => {
+			if (isScrolling) return;
+			
+			const endY = e.changedTouches[0].clientY;
+			const diffY = startY - endY;
+			
+			if (Math.abs(diffY) > 50) {
+				if (diffY > 0) {
+					goToSection(currentSection + 1);
+				} else {
+					goToSection(currentSection - 1);
+				}
+			}
+		}, { passive: true });
+		
+		const initialHash = window.location.hash.substring(1);
+		if (initialHash) {
+			for (let i = 0; i < sections.length; i++) {
+				if (sections[i].id === initialHash) {
+					setTimeout(() => goToSection(i), 100);
+					break;
+				}
+			}
+		}
+	});
+</script>
+
+<style>
+	.fullpage-container {
+		position: relative;
+	}
+</style>

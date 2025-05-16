@@ -1,0 +1,74 @@
+---
+import ExperienceCard from './ExperienceCard.astro';
+
+interface Experience {
+  title: string;
+  company: string;
+  period: string;
+  description: string;
+  skills: string[];
+}
+
+const experiences: Experience[] = [
+  {
+    title: "Desarrollador Full Stack",
+    company: "Cobro Inmediato",
+    period: "Dic. 2023 - Presente",
+    description: "Desarrollo de Plataforma de para gestionar pagos y cobros de manera eficiente.",
+    skills: ["React", "NodeJS", "TypeScript", "Microservicios", "Docker", "AWS"]
+  },
+  {
+    title: "Desarrollador Full Stack",
+    company: "MG Intelligence",
+    period: "Jul. 2022 - Nov. 2023",
+    description: "Desarrollo de Aplicaciones para clientes de la empresa.",
+    skills: ["VueJS", "NodeJS", "React Native", "SQL Server", "PostgreSQL", "AWS"]
+  },
+  {
+    title: "Tutor de Curso de JavaScript",
+    company: "Coderhouse",
+    period: "Jun. 2022 - Nov. 2023",
+    description: "Encargado de la tutoria de los alumnos en el curso de JavaScript.",
+    skills: ["JavaScript"]
+  },
+  {
+    title: "UI Developer",
+    company: "Lyracons",
+    period: "Dic. 2021 - Feb. 2022",
+    description: "Desarrollo y mantenimiento de plataformas e-commerce de los clientes de la empresa.",
+    skills: ["React", "Vtex-io", "CSS", "JQuery", "Vtex"]
+  }
+];
+---
+
+<section class="content-container smooth-transition py-6 md:py-10">
+  <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-white text-center mb-4 sm:mb-6 md:mb-10">
+    <span class="border-b-2 border-blue-400 pb-1">Experiencia Profesional</span>
+  </h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 sm:gap-4 xs:gap-3 w-full max-w-[1200px] mx-auto px-4 xs:px-2">
+    {experiences.map((experience) => (
+      <ExperienceCard 
+        title={experience.title}
+        company={experience.company}
+        period={experience.period}
+        description={experience.description}
+        skills={experience.skills}
+      />
+    ))}
+  </div>
+</section>
+
+<style>
+  /* Minimal styles that can't be handled with Tailwind */
+  @media (max-width: 480px) {
+    :global(.xs\:px-2) {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+    
+    :global(.xs\:gap-3) {
+      gap: 0.75rem;
+    }
+  }
+</style> 
