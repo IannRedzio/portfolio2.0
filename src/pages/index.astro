@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import Experience from '../components/Experience.astro';
+import AboutMe from '../components/AboutMe.astro';
 import UnderConstruction from '../components/UnderConstruction.astro';
 
 const hostname = Astro.url.hostname;
@@ -22,6 +23,9 @@ console.log('INDEX.ASTRO - ¿Es producción?', isProduction);
 			</div>
 			<div id="experiencia" class="fullpage-section">
 				<Experience />
+			</div>
+			<div id="sobre-mi" class="fullpage-section">
+				<AboutMe />
 			</div>
 		</main>
 	</Layout>
