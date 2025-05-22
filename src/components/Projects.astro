@@ -1,0 +1,142 @@
+---
+interface Project {
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+  url: string;
+}
+
+const projects: Project[] = [
+  {
+    title: "Minijuego: Quiz de preguntas",
+    description: "Minijuego de preguntas y respuestas con un tema en común. Basado en Quien quiere ser millonario.",
+    image: "/project-dashboard.jpg",
+    tags: ["React", "JavaScript", "HTML", "CSS"],
+    url: "https://github.com/username/ecommerce-dashboard"
+  },
+  {
+    title: "Google Search - Clone",
+    description: "Clon de la interfaz de Google Search. Basado en la página de Google Search.",
+    image: "/project-api.jpg",
+    tags: ["React", "JavaScript", "HTML", "CSS"],
+    url: "https://github.com/username/rest-api"
+  },
+  {
+    title: "League of Legends Web Idea",
+    description: "Aplicación sobre Personajes de League of Legends para practicar maquetado y Animaciones avanzadas.",
+    image: "/project-tasks.jpg",
+    tags: ["Vue.js", "Firebase", "Tailwind CSS"],
+    url: "https://github.com/username/task-manager"
+  },
+  {
+    title: "Portfolio Personal",
+    description: "Mi portfolio personal construido con Astro y Tailwind CSS.",
+    image: "/project-portfolio.jpg",
+    tags: ["Astro", "Tailwind CSS", "TypeScript"],
+    url: "https://ianredzio-portfolio.vercel.app/"
+  }
+];
+---
+
+<section class="content-container smooth-transition py-2 md:py-6">
+  <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-white text-center mb-2 sm:mb-4">
+    <span class="border-b-2 border-blue-400 pb-1">Proyectos destacados</span>
+  </h2>
+  
+  <div class="max-w-7xl mx-auto overflow-y-auto max-h-[calc(100vh-var(--nav-height)-5rem)] md:max-h-none px-1">
+    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 xl:gap-4">
+      {projects.map(project => (
+        <div class="bg-[#131339]/50 backdrop-blur-sm rounded border border-white/10 shadow-lg overflow-hidden flex flex-col h-[230px] sm:h-[250px] md:h-[280px] xl:h-[320px]">
+          <div class="h-16 sm:h-20 md:h-28 xl:h-32 bg-gray-800 overflow-hidden">
+            <img 
+              src={project.image} 
+              alt={`Miniatura de ${project.title}`} 
+              class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity"
+            />
+          </div>
+          
+          <div class="p-2 sm:p-3 md:p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="text-xs sm:text-sm md:text-base xl:text-lg font-bold text-white mb-1 md:mb-2 truncate">{project.title}</h3>
+              
+              <p class="text-white/80 text-[10px] sm:text-xs md:text-sm line-clamp-2 md:line-clamp-3 mb-1 md:mb-2">
+                {project.description}
+              </p>
+            </div>
+            
+            <div class="mt-auto">
+              <div class="flex flex-wrap gap-1 md:gap-1.5 mb-1 md:mb-2">
+                {project.tags.map((tag, index) => (
+                  <span 
+                    class={`
+                      text-[8px] sm:text-[9px] md:text-xs 
+                      px-1 md:px-1.5 py-0.5 
+                      bg-[#0E0E29] text-blue-300 rounded
+                      ${index >= 2 ? 'hidden lg:inline-block' : ''}
+                      ${index >= 3 ? 'lg:hidden' : ''}
+                    `}
+                  >
+                    {tag}
+                  </span>
+                ))}
+                
+                {project.tags.length > 2 && (
+                  <span class="text-[8px] sm:text-[9px] md:text-xs px-1 py-0.5 text-white/70 lg:hidden">
+                    +{project.tags.length - 2}
+                  </span>
+                )}
+                
+                {project.tags.length > 3 && (
+                  <span class="text-[8px] sm:text-[9px] md:text-xs px-1 py-0.5 text-white/70 hidden lg:inline-block">
+                    +{project.tags.length - 3}
+                  </span>
+                )}
+              </div>
+              
+              <a 
+                href={project.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="inline-block px-2 py-0.5 sm:px-2.5 sm:py-1 md:px-3 md:py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-[10px] sm:text-xs md:text-sm font-medium rounded transition-colors w-fit"
+              >
+                Ver proyecto
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const projectImages = document.querySelectorAll('img[src^="/project-"]');
+    projectImages.forEach(img => {
+      img.addEventListener('error', () => {
+        (img as HTMLImageElement).src = "https://via.placeholder.com/800x400/131339/55c1ff?text=Proyecto";
+      });
+    });
+  });
+</script>
+
+<style>
+  @media (max-width: 480px) {
+    .content-container {
+      padding: 0 0.25rem;
+    }
+  }
+  
+  @media (min-width: 481px) and (max-width: 1400px) {
+    .content-container {
+      padding: 0 0.5rem;
+    }
+  }
+  
+  @media (min-width: 1401px) {
+    .content-container {
+      padding: 0 1rem;
+    }
+  }
+</style> 
