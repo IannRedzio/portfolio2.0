@@ -41,34 +41,28 @@ const {
 </style>
 
 <script define:vars={{ text, speed, startDelay, cursorBlinkDelay }}>
-  // Función para simular la escritura letra por letra
   function typeText() {
     const textElement = document.getElementById('typewriter-text');
     const cursorElement = document.getElementById('typewriter-cursor');
     const targetText = text;
     let index = 0;
 
-    // Iniciar la animación después del retraso inicial
     setTimeout(() => {
-      // Función para agregar caracteres uno por uno
       function addCharacter() {
         if (index < targetText.length) {
           textElement.textContent += targetText.charAt(index);
           index++;
           setTimeout(addCharacter, speed);
         } else {
-          // Hacer que el cursor desaparezca después de terminar de escribir
           setTimeout(() => {
             cursorElement.classList.add('cursor-stop');
           }, cursorBlinkDelay);
         }
       }
       
-      // Iniciar la adición de caracteres
       addCharacter();
     }, startDelay);
   }
 
-  // Ejecutar cuando el DOM esté cargado
   document.addEventListener('DOMContentLoaded', typeText);
 </script> 
