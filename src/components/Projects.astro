@@ -1,8 +1,9 @@
 ---
+
 interface Project {
   title: string;
   description: string;
-  image: string;
+  image: any;
   tags: string[];
   url: string;
 }
@@ -11,28 +12,28 @@ const projects: Project[] = [
   {
     title: "Minijuego: Quiz de preguntas",
     description: "Minijuego de preguntas y respuestas con un tema en común. Basado en Quien quiere ser millonario.",
-    image: "/project-dashboard.jpg",
+    image: "/images/QuizzApp.png",
     tags: ["React", "JavaScript", "HTML", "CSS"],
     url: "https://github.com/username/ecommerce-dashboard"
   },
   {
     title: "Google Search - Clone",
     description: "Clon de la interfaz de Google Search. Basado en la página de Google Search.",
-    image: "/project-api.jpg",
+    image: "/images/GoogleClone.png",
     tags: ["React", "JavaScript", "HTML", "CSS"],
     url: "https://github.com/username/rest-api"
   },
   {
     title: "League of Legends Web Idea",
     description: "Aplicación sobre Personajes de League of Legends para practicar maquetado y Animaciones avanzadas.",
-    image: "/project-tasks.jpg",
-    tags: ["Vue.js", "Firebase", "Tailwind CSS"],
+    image: "/images/LeagueOfLegendsWeb.png",
+    tags: ["React", "JavaScript", "HTML", "CSS", "Vite"],
     url: "https://github.com/username/task-manager"
   },
   {
     title: "Portfolio Personal",
     description: "Mi portfolio personal construido con Astro y Tailwind CSS.",
-    image: "/project-portfolio.jpg",
+    image: "/images/Portfolio.png",
     tags: ["Astro", "Tailwind CSS", "TypeScript"],
     url: "https://ianredzio-portfolio.vercel.app/"
   }
@@ -50,9 +51,9 @@ const projects: Project[] = [
         <div class="bg-[#131339]/50 backdrop-blur-sm rounded border border-white/10 shadow-lg overflow-hidden flex flex-col h-[230px] sm:h-[250px] md:h-[280px] xl:h-[320px]">
           <div class="h-16 sm:h-20 md:h-28 xl:h-32 bg-gray-800 overflow-hidden">
             <img 
-              src={project.image} 
+              src={typeof project.image === 'string' ? project.image : project.image.src} 
               alt={`Miniatura de ${project.title}`} 
-              class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity"
+              class="w-full h-full object-fill opacity-80 hover:opacity-100 transition-opacity"
             />
           </div>
           
@@ -112,7 +113,7 @@ const projects: Project[] = [
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const projectImages = document.querySelectorAll('img[src^="/project-"]');
+    const projectImages = document.querySelectorAll('.grid img');
     projectImages.forEach(img => {
       img.addEventListener('error', () => {
         (img as HTMLImageElement).src = "https://via.placeholder.com/800x400/131339/55c1ff?text=Proyecto";
