@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css';
-import UnderConstruction from '../components/UnderConstruction.astro';
 
 interface Props {
 	title?: string;
@@ -12,71 +11,44 @@ const {
 	description = 'Portfolio personal de Ian Redzio, Programador FullStack especializado en crear aplicaciones web.' 
 } = Astro.props;
 
-const hostname = Astro.url.hostname;
-const isProduction = hostname.includes('vercel.app');
-const isLocalhost = !isProduction && (hostname === 'localhost' || hostname === '127.0.0.1');
-
-console.log('SERVER - Hostname actual:', hostname);
-console.log('SERVER - ¿Es producción?', isProduction);
-console.log('SERVER - ¿Es localhost?', isLocalhost);
 ---
 
-{isProduction ? (
-  <UnderConstruction />
-) : (
-  <html lang="es" class="scroll-smooth">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-      <meta name="generator" content={Astro.generator} />
-      <meta name="description" content={description} />
-      <title>{title}</title>
-      <!-- Fuente Inter de Google Fonts -->
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-      <style>
-        :root {
-          --color-primary: #0E0E29;
-          --color-primary-dark: #080818;
-        }
-        
-        body {
-          font-family: 'Inter', sans-serif;
-          margin: 0;
-          padding: 0;
-        }
-      </style>
-      <script>
-        // Script para verificación adicional del lado del cliente
-        const clientHostname = window.location.hostname;
-        console.log('CLIENTE - URL hostname:', clientHostname);
-        console.log('CLIENTE - ¿Contiene vercel.app?', clientHostname.includes('vercel.app'));
-        
-        // Verificación de seguridad adicional para garantizar redirección
-        if (clientHostname.includes('vercel.app') && !window.location.pathname.includes('under-construction')) {
-          window.location.href = '/under-construction';
-        }
-
-        // Script para asegurarse que se cargue primero el hero
-        document.addEventListener('DOMContentLoaded', () => {
-          window.scrollTo(0, 0);
-          document.documentElement.scrollTop = 0;
-          document.body.scrollTop = 0;
-        });
-      </script>
-    </head>
-    <body>
-      <slot />
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <!-- Fuente Inter de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --color-primary: #0E0E29;
+        --color-primary-dark: #080818;
+      }
       
-      {/* Elemento para depuración visible */}
-      <div style="position: fixed; bottom: 10px; right: 10px; background: black; color: white; padding: 5px; font-size: 10px; z-index: 9999;">
-        Host: {hostname} | Entorno: {isProduction ? 'Producción' : 'Desarrollo'}
-      </div>
-    </body>
-  </html>
-)}
+      body {
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      });
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
 
 <style is:global>
 	html,
