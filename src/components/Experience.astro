@@ -41,12 +41,12 @@ const experiences: Experience[] = [
 ];
 ---
 
-<section class="content-container smooth-transition py-6 md:py-10">
-  <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-white text-center mb-4 sm:mb-6 md:mb-10">
+<section class="content-container smooth-transition py-4 sm:py-6 md:py-10">
+  <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white text-center mb-3 sm:mb-4 md:mb-6">
     <span class="border-b-2 border-blue-400 pb-1">Experiencia Profesional</span>
   </h2>
   
-  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 sm:gap-4 xs:gap-3 w-full max-w-[1200px] mx-auto px-4 xs:px-2">
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4 md:gap-6 w-full max-w-[1200px] mx-auto px-2 sm:px-4">
     {experiences.map((experience) => (
       <ExperienceCard 
         title={experience.title}
@@ -60,15 +60,20 @@ const experiences: Experience[] = [
 </section>
 
 <style>
-  /* Minimal styles that can't be handled with Tailwind */
+  /* Estilos responsivos */
   @media (max-width: 480px) {
-    :global(.xs\:px-2) {
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
+    .content-container {
+      padding: 0 0.75rem;
     }
     
-    :global(.xs\:gap-3) {
-      gap: 0.75rem;
+    :global(.grid-cols-1) {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+  }
+  
+  @media (min-width: 481px) and (max-width: 639px) {
+    .content-container {
+      padding: 0 1rem;
     }
   }
 </style> 

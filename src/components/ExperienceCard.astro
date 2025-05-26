@@ -10,62 +10,55 @@ interface Props {
 const { title, company, period, description, skills } = Astro.props;
 ---
 
-<div class="bg-[rgba(14,14,41,0.6)] border border-[rgba(85,193,255,0.1)] rounded-xl p-6 sm:p-5 xs:p-4 transition-all duration-300 backdrop-blur-md h-full flex flex-col hover:translate-y-[-5px] hover:shadow-lg hover:border-[rgba(85,193,255,0.3)]">
-  <div class="flex justify-end mb-3 xs:mb-2">
+<div class="bg-[rgba(14,14,41,0.6)] border border-[rgba(85,193,255,0.1)] rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 backdrop-blur-md h-full flex flex-col hover:translate-y-[-5px] hover:shadow-lg hover:border-[rgba(85,193,255,0.3)]">
+  <div class="flex justify-end mb-2 sm:mb-3">
     <div>
-      <span class="text-blue-300 text-xs xs:text-[0.65rem]">{period}</span>
+      <span class="text-blue-300 text-[0.65rem] xs:text-xs sm:text-sm">{period}</span>
     </div>
   </div>
   <div class="flex flex-col flex-1">
-    <h3 class="text-base font-bold text-white mb-1 xs:text-sm">{title}</h3>
-    <p class="text-yellow-300 font-medium text-xs mb-2 xs:text-[0.65rem] xs:mb-1">{company}</p>
-    <p class="text-white/80 text-xs mb-3 xs:text-[0.65rem] xs:mb-2 xs:leading-snug">{description}</p>
+    <h3 class="text-sm sm:text-base font-bold text-white mb-1">{title}</h3>
+    <p class="text-yellow-300 font-medium text-[0.65rem] xs:text-xs sm:text-sm mb-1 sm:mb-2">{company}</p>
+    <p class="text-white/80 text-[0.65rem] xs:text-xs sm:text-sm mb-2 sm:mb-3 leading-snug sm:leading-normal">{description}</p>
     <div class="flex flex-wrap gap-1">
       {skills.map((skill) => (
-        <span class="inline-block bg-[rgba(14,28,85,0.3)] text-[#55c1ff] text-[0.625rem] xs:text-[0.55rem] rounded-full px-3 py-1 xs:px-2 xs:py-0.5 mb-1.5 transition-colors duration-200 hover:bg-[rgba(14,28,85,0.5)]">{skill}</span>
+        <span class="inline-block bg-[rgba(14,28,85,0.3)] text-[#55c1ff] text-[0.55rem] xs:text-[0.625rem] sm:text-xs rounded-full px-2 py-0.5 xs:px-2 sm:px-3 sm:py-1 mb-1 transition-colors duration-200 hover:bg-[rgba(14,28,85,0.5)]">{skill}</span>
       ))}
     </div>
   </div>
 </div>
 
 <style>
-  @media (max-width: 480px) {
-    :global(.xs\:text-\[0\.65rem\]) {
-      font-size: 0.65rem;
-    }
-    
-    :global(.xs\:text-\[0\.55rem\]) {
+  /* Estilos para dispositivos extra pequeños */
+  @media (max-width: 374px) {
+    :global(.text-\[0\.55rem\]) {
       font-size: 0.55rem;
     }
     
-    :global(.xs\:text-sm) {
-      font-size: 0.875rem;
+    :global(.text-\[0\.65rem\]) {
+      font-size: 0.65rem;
+    }
+  }
+  
+  /* Breakpoint personalizado para tamaños intermedios */
+  @media (min-width: 375px) and (max-width: 480px) {
+    :global(.xs\:text-xs) {
+      font-size: 0.75rem;
     }
     
-    :global(.xs\:mb-1) {
-      margin-bottom: 0.25rem;
-    }
-    
-    :global(.xs\:mb-2) {
-      margin-bottom: 0.5rem;
-    }
-    
-    :global(.xs\:p-4) {
-      padding: 1rem;
+    :global(.xs\:text-\[0\.625rem\]) {
+      font-size: 0.625rem;
     }
     
     :global(.xs\:px-2) {
       padding-left: 0.5rem;
       padding-right: 0.5rem;
     }
-    
-    :global(.xs\:py-0\.5) {
-      padding-top: 0.125rem;
-      padding-bottom: 0.125rem;
-    }
-    
-    :global(.xs\:leading-snug) {
-      line-height: 1.25;
+  }
+  
+  @media (max-width: 480px) {
+    .content-container {
+      padding: 0.5rem;
     }
   }
 </style> 

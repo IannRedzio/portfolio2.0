@@ -34,18 +34,18 @@ const allTechs = [
 ];
 ---
 
-<section class="content-container smooth-transition py-6 md:py-10">
-  <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-white text-center mb-4 sm:mb-6 md:mb-10">
+<section class="content-container smooth-transition py-4 sm:py-6 md:py-10">
+  <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-white text-center mb-4 sm:mb-6 md:mb-8">
     <span class="border-b-2 border-blue-400 pb-1">Tecnologías y herramientas que uso</span>
   </h2>
   
-  <div class="max-w-2xl mx-auto">
-    <div class="bg-[#131339]/50 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-white/10 shadow-xl">
-      <div class="grid grid-cols-5 sm:grid-cols-7 gap-1 justify-items-center">
+  <div class="max-w-2xl mx-auto px-2 sm:px-4">
+    <div class="bg-[#131339]/50 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-8 border border-white/10 shadow-xl">
+      <div class="grid grid-cols-4 xs:grid-cols-5 sm:grid-cols-7 gap-1 xs:gap-2 sm:gap-3 justify-items-center">
         {allTechs.map(tech => (
-          <div class="flex flex-col items-center p-1 rounded-lg hover:bg-white/5 transition-colors w-[65px] h-[65px] sm:w-[75px] sm:h-[75px] justify-center">
+          <div class="flex flex-col items-center p-1 rounded-lg hover:bg-white/5 transition-colors w-[50px] h-[60px] xs:w-[60px] xs:h-[65px] sm:w-[75px] sm:h-[75px] justify-center">
             <div 
-              class="w-7 h-7 sm:w-8 sm:h-8 mb-1 flex items-center justify-center" 
+              class="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 mb-1 flex items-center justify-center" 
               style={`color: ${tech.color}`}
             >
               <svg 
@@ -59,7 +59,7 @@ const allTechs = [
                 <path d={tech.icon.path} />
               </svg>
             </div>
-            <span class="text-white text-[9px] sm:text-[10px] font-medium text-center">{tech.name}</span>
+            <span class="text-white text-[8px] xs:text-[9px] sm:text-[10px] font-medium text-center">{tech.name}</span>
           </div>
         ))}
       </div>
@@ -70,7 +70,41 @@ const allTechs = [
 <style>
   @media (max-width: 480px) {
     .content-container {
-      padding: 0 1rem;
+      padding: 0 0.5rem;
+    }
+    
+    :global(.xs\:grid-cols-5) {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    
+    :global(.xs\:w-7) {
+      width: 1.75rem;
+    }
+    
+    :global(.xs\:h-7) {
+      height: 1.75rem;
+    }
+    
+    :global(.xs\:w-\[60px\]) {
+      width: 60px;
+    }
+    
+    :global(.xs\:h-\[65px\]) {
+      height: 65px;
+    }
+    
+    :global(.xs\:text-\[9px\]) {
+      font-size: 9px;
+    }
+    
+    :global(.xs\:gap-2) {
+      gap: 0.5rem;
+    }
+  }
+  
+  @media (max-width: 374px) {
+    :global(.grid-cols-4) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 </style> 

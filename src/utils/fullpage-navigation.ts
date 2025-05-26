@@ -1,11 +1,11 @@
-/**
- * Sistema de navegación fullpage
- */
+
 
 interface NavigationState {
   isNavigating: boolean;
   touchStartY: number;
   currentSectionIndex: number;
+  isMobile: boolean;
+  isMenuOpen: boolean;
 }
 
 
@@ -13,19 +13,29 @@ export function initFullpageNavigation(): void {
   const state: NavigationState = {
     isNavigating: false,
     touchStartY: 0,
-    currentSectionIndex: 0
+    currentSectionIndex: 0,
+    isMobile: window.innerWidth < 768,
+    isMenuOpen: false
   };
   
+  window.addEventListener('resize', () => {
+    state.isMobile = window.innerWidth < 768;
+  });
+  
+  const checkMenuState = () => {
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenu) {
+      state.isMenuOpen = mobileMenu.classList.contains('opacity-100');
+    }
+  };
 
   function setupInitialView(): void {
     const mainContainer: HTMLElement | null = document.getElementById('main-container');
     const body: HTMLElement = document.body;
     
     if (mainContainer) {
-      // Forzar scroll al inicio
       mainContainer.scrollTop = 0;
       
-      // Aplicar transiciones suaves después de la carga
       setTimeout(() => {
         body.classList.add('loaded');
         mainContainer.scrollTop = 0;
@@ -38,35 +48,32 @@ export function initFullpageNavigation(): void {
   }
   
   /**
-   * Navega a una sección específica según su índice
    * @param index - Índice de la sección a la que navegar
    */
   function navigateToSection(index: number): void {
+    if (state.isMenuOpen) return;
+    
     const mainContainer: HTMLElement | null = document.getElementById('main-container');
     if (!mainContainer) return;
     
     const sections: NodeListOf<Element> = document.querySelectorAll('.fullpage-section');
     
     if (index >= 0 && index < sections.length) {
-      // Bloquear nueva navegación mientras animamos
       state.isNavigating = true;
       state.currentSectionIndex = index;
       
       const targetSection: Element = sections[index];
       const targetPosition: number = (targetSection as HTMLElement).offsetTop;
       
-      // Animar scroll
       mainContainer.scrollTo({
         top: targetPosition,
         behavior: 'smooth'
       });
       
-      // Actualizar URL sin causar scroll
       if (targetSection.id) {
         history.replaceState(null, '', `#${targetSection.id}`);
       }
       
-      // Permitir nueva navegación después de la animación
       setTimeout(() => {
         state.isNavigating = false;
       }, 800);
@@ -74,10 +81,13 @@ export function initFullpageNavigation(): void {
   }
   
   /**
-   * Maneja eventos de rueda del mouse para navegación
    * @param event - Evento de rueda del mouse
    */
   function handleWheelNavigation(event: WheelEvent): void {
+    checkMenuState();
+    
+    if (state.isMobile || state.isMenuOpen) return;
+    
     if (state.isNavigating) {
       event.preventDefault();
       return;
@@ -85,10 +95,8 @@ export function initFullpageNavigation(): void {
     
     const scrollDirection: number = Math.sign(event.deltaY);
     if (scrollDirection > 0) {
-      // Scroll hacia abajo: siguiente sección
-      navigateToSection(state.currentSectionIndex + 1);
+        navigateToSection(state.currentSectionIndex + 1);
     } else {
-      // Scroll hacia arriba: sección anterior
       navigateToSection(state.currentSectionIndex - 1);
     }
     
@@ -100,6 +108,10 @@ export function initFullpageNavigation(): void {
    * @param event - Evento táctil de inicio
    */
   function handleTouchStart(event: TouchEvent): void {
+    checkMenuState();
+    
+    if (state.isMenuOpen) return;
+    
     state.touchStartY = event.touches[0].clientY;
   }
   
@@ -108,6 +120,28 @@ export function initFullpageNavigation(): void {
    * @param event - Evento táctil de fin
    */
   function handleTouchEnd(event: TouchEvent): void {
+    checkMenuState();
+    
+    if (state.isMenuOpen) return;
+    
+    if (state.isMobile) {
+      const SWIPE_THRESHOLD: number = 80;
+      
+      if (state.isNavigating) return;
+      
+      const touchEndY: number = event.changedTouches[0].clientY;
+      const touchDeltaY: number = state.touchStartY - touchEndY;
+      
+      if (Math.abs(touchDeltaY) > SWIPE_THRESHOLD) {
+        if (touchDeltaY > 0) {
+          navigateToSection(state.currentSectionIndex + 1);
+        } else {
+          navigateToSection(state.currentSectionIndex - 1);
+        }
+      }
+      return;
+    }
+    
     if (state.isNavigating) return;
     
     const touchEndY: number = event.changedTouches[0].clientY;
@@ -116,17 +150,14 @@ export function initFullpageNavigation(): void {
     
     if (Math.abs(touchDeltaY) > SWIPE_THRESHOLD) {
       if (touchDeltaY > 0) {
-        // Deslizamiento hacia arriba: siguiente sección
         navigateToSection(state.currentSectionIndex + 1);
       } else {
-        // Deslizamiento hacia abajo: sección anterior
         navigateToSection(state.currentSectionIndex - 1);
       }
     }
   }
   
   /**
-   * Navega a la sección correspondiente al hash inicial en la URL
    */
   function navigateToInitialSection(): void {
     const hash: string = window.location.hash.substring(1);
@@ -142,26 +173,54 @@ export function initFullpageNavigation(): void {
   }
   
   /**
-   * Configura los escuchadores de eventos para la navegación
    */
   function setupEventListeners(): void {
     const mainContainer: HTMLElement | null = document.getElementById('main-container');
     if (!mainContainer) return;
     
-    // Evento de rueda para navegación vertical
     mainContainer.addEventListener('wheel', handleWheelNavigation, { passive: false });
     
-    // Eventos táctiles para dispositivos móviles
     mainContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
     mainContainer.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const closeMenuButton = document.getElementById('close-menu-button');
+    
+    if (mobileMenuButton) {
+      mobileMenuButton.addEventListener('click', () => {
+        setTimeout(checkMenuState, 10);
+      });
+    }
+    
+    if (closeMenuButton) {
+      closeMenuButton.addEventListener('click', () => {
+        setTimeout(checkMenuState, 10);
+      });
+    }
+    
+    mainContainer.addEventListener('scroll', () => {
+      if (state.isNavigating || state.isMenuOpen) return;
+      
+      const scrollPosition = mainContainer.scrollTop;
+      const sections = document.querySelectorAll('.fullpage-section');
+      
+      sections.forEach((section, index) => {
+        const sectionEl = section as HTMLElement;
+        const sectionTop = sectionEl.offsetTop;
+        const sectionHeight = sectionEl.offsetHeight;
+        
+        if (scrollPosition >= sectionTop - 100 && 
+            scrollPosition < sectionTop + sectionHeight - 100) {
+          state.currentSectionIndex = index;
+        }
+      });
+    });
   }
   
-  // Inicializar navegación cuando el DOM está cargado
   document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     navigateToInitialSection();
   });
   
-  // Configurar vista inicial cuando la página esté completamente cargada
   window.addEventListener('load', setupInitialView);
 } 

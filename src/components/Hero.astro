@@ -5,23 +5,25 @@ import LinkedinIcon from '../icons/LinkedinIcon.astro';
 import TypewriterText from './TypewriterText.astro';
 ---
 
-<div class="content-container smooth-transition">
-  <div class="mb-10">
-    <TypewriterText 
-      text="Hey, soy Ian Redzio" 
-      speed={120}
-      startDelay={400}
-      cursorBlinkDelay={800}
-    />
+<div class="content-container smooth-transition px-4 sm:px-6 md:px-8">
+  <div class="mb-6 sm:mb-8 md:mb-10">
+    <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">
+      <TypewriterText 
+        text="Hey, soy Ian Redzio" 
+        speed={120}
+        startDelay={400}
+        cursorBlinkDelay={800}
+      />
+    </div>
     
-    <div class="space-y-3 text-lg md:text-xl text-white/90">
+    <div class="space-y-2 sm:space-y-3 text-base sm:text-lg md:text-xl text-white/90 mt-3 sm:mt-4">
       <p class="leading-relaxed">
         +3 años de experiencia. <span class="text-yellow-300 font-medium">Desarrollador Full Stack</span> de Buenos Aires, Argentina <span class="ml-1">🇦🇷</span>
       </p>
     </div>
   </div>
   
-  <div class="flex flex-wrap gap-4">
+  <div class="flex flex-wrap gap-3 sm:gap-4">
     <Button href="mailto:ianredzio13@gmail.com"> 
       <span class="mr-2"><EmailIcon /></span>
       Contáctame
@@ -31,4 +33,12 @@ import TypewriterText from './TypewriterText.astro';
       LinkedIn
     </Button>
   </div>
-</div> 
+</div>
+
+<style>
+  @media (max-width: 480px) {
+    :global(.content-container) {
+      padding-top: 2rem;
+    }
+  }
+</style> 

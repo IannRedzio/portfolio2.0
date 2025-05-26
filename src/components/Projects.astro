@@ -45,8 +45,8 @@ const projects: Project[] = [
     <span class="border-b-2 border-blue-400 pb-1">Proyectos destacados</span>
   </h2>
   
-  <div class="max-w-7xl mx-auto overflow-y-auto max-h-[calc(100vh-var(--nav-height)-5rem)] md:max-h-none px-1">
-    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 xl:gap-4">
+  <div class="max-w-7xl mx-auto overflow-y-auto max-h-[calc(100vh-var(--nav-height)-5rem)] md:max-h-none px-1 sm:px-2 md:px-4">
+    <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 xl:gap-4">
       {projects.map(project => (
         <div class="bg-[#131339]/50 backdrop-blur-sm rounded border border-white/10 shadow-lg overflow-hidden flex flex-col h-[230px] sm:h-[250px] md:h-[280px] xl:h-[320px]">
           <div class="h-16 sm:h-20 md:h-28 xl:h-32 bg-gray-800 overflow-hidden">
@@ -125,13 +125,23 @@ const projects: Project[] = [
 <style>
   @media (max-width: 480px) {
     .content-container {
-      padding: 0 0.25rem;
+      padding: 0 0.5rem;
+    }
+    
+    /* Añadir breakpoint personalizado para pantallas extra pequeñas */
+    :global(.xs\:grid-cols-2) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    :global(.xs\:px-2) {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
     }
   }
   
   @media (min-width: 481px) and (max-width: 1400px) {
     .content-container {
-      padding: 0 0.5rem;
+      padding: 0 0.75rem;
     }
   }
   
