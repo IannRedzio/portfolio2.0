@@ -11,16 +11,13 @@ const {
   class: className = ''
 } = Astro.props;
 
-// Clases base para todos los botones
-const baseClasses = "inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200";
+const baseClasses = "inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 hover:transform hover:scale-105 active:scale-95";
 
-// Clases específicas según la variante
 const variantClasses = {
-  primary: "bg-white/10 hover:bg-white/15 text-white border border-white/10 hover:border-white/25 hover:shadow-sm",
-  outline: "bg-transparent hover:bg-white/5 text-white border border-white/20 hover:border-white/30"
+  primary: "bg-blue-600 hover:bg-blue-700 text-white border border-blue-600 hover:border-blue-700 shadow-md hover:shadow-lg dark:bg-blue-500 dark:hover:bg-blue-600 dark:border-blue-500 dark:hover:border-blue-600 focus:ring-blue-500 dark:focus:ring-blue-400 focus:ring-offset-white dark:focus:ring-offset-gray-800",
+  outline: "bg-transparent hover:bg-blue-50 dark:hover:bg-blue-900/20 text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-400 hover:border-blue-700 dark:hover:border-blue-300 focus:ring-blue-500 dark:focus:ring-blue-400 focus:ring-offset-white dark:focus:ring-offset-gray-800"
 };
 
-// Combinar todas las clases
 const classes = `${baseClasses} ${variantClasses[variant]} ${className}`;
 ---
 

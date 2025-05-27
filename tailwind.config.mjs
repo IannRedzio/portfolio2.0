@@ -1,14 +1,20 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  darkMode: 'class', 
   theme: {
     extend: {
       colors: {
-        'primary': '#0E0E29', // Color de fondo oscuro
-        'primary-dark': '#080818', // Una variante más oscura
-        'accent': '#55c1ff',  // Color de acento para destacados
-        'secondary': '#FFFFFF', // Color secundario (blanco para textos)
-        'highlight': '#FBBF24', // Color amarillo para destacados
+        'primary': '#0E0E29', 
+        'primary-dark': '#080818', 
+        'accent': '#55c1ff',  
+        'secondary': '#FFFFFF', 
+        'highlight': '#FBBF24', 
+        'light-primary': '#FFFFFF',
+        'light-primary-dark': '#F8F9FA',
+        'light-secondary': '#1F2937',
+        'light-accent': '#3B82F6',
+        'light-highlight': '#F59E0B',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
