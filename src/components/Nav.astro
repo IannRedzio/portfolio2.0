@@ -135,10 +135,6 @@ const menuItems: MenuItem[] = [
     const themeLoading = document.getElementById('theme-loading');
     
     if (themeToggle && themeLoading) {
-      const getSystemTheme = () => {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      };
-      
       const applyTheme = (theme: 'dark' | 'light') => {
         const html = document.documentElement;
         
@@ -157,17 +153,6 @@ const menuItems: MenuItem[] = [
         }, 300);
       };
       
-      const initTheme = () => {
-        const savedTheme = localStorage.getItem('theme') as 'dark' | 'light' | null;
-        const systemTheme = getSystemTheme();
-        
-        if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
-          applyTheme(savedTheme);
-        } else {
-          applyTheme(systemTheme);
-        }
-      };
-      
       const toggleTheme = () => {
         const html = document.documentElement;
         const currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
@@ -176,13 +161,13 @@ const menuItems: MenuItem[] = [
         applyTheme(newTheme);
       };
       
+      // Listener para cambios en el tema del sistema solo si no hay tema guardado
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) {
+        const savedTheme = localStorage.getItem('theme');
+        if (!savedTheme) {
           applyTheme(e.matches ? 'dark' : 'light');
         }
       });
-      
-      initTheme();
       
       themeToggle.addEventListener('click', toggleTheme);
     }

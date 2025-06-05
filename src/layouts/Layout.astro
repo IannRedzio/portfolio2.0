@@ -13,7 +13,7 @@ const {
 
 ---
 
-<html lang="es" class="scroll-smooth">
+<html lang="es" class="scroll-smooth dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,10 +21,33 @@ const {
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <title>{title}</title>
-    <!-- Fuente Inter de Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script>
+      (function() {
+        const getSystemTheme = () => {
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        };
+        
+        const savedTheme = localStorage.getItem('theme');
+        const systemTheme = getSystemTheme();
+        const theme = savedTheme && (savedTheme === 'dark' || savedTheme === 'light') 
+          ? savedTheme 
+          : 'dark'; 
+        
+        const html = document.documentElement;
+        if (theme === 'dark') {
+          html.classList.add('dark');
+        } else {
+          html.classList.remove('dark');
+        }
+        
+        if (!savedTheme) {
+          localStorage.setItem('theme', theme);
+        }
+      })();
+    </script>
     <style>
       :root {
         --color-primary: #0E0E29;
