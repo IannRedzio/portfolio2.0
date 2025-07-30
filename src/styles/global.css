@@ -76,6 +76,13 @@ html, body {
   overflow: hidden;
 }
 
+/* Soporte para móviles con barras dinámicas */
+@supports (height: 100dvh) {
+  html, body {
+    height: 100dvh;
+  }
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--nav-height);
@@ -106,6 +113,13 @@ body {
   transition: background-color 0.3s ease;
 }
 
+/* Soporte para móviles con barras dinámicas */
+@supports (height: 100dvh) {
+  .fullpage-container {
+    height: 100dvh;
+  }
+}
+
 .fullpage-container::-webkit-scrollbar {
   display: none;
 }
@@ -132,6 +146,13 @@ body::before {
   scroll-snap-align: center;
   scroll-snap-stop: always;
   position: relative;
+}
+
+/* Soporte para móviles con barras dinámicas */
+@supports (height: 100dvh) {
+  .fullpage-section {
+    height: 100dvh;
+  }
 }
 
 .content-container {
@@ -197,6 +218,7 @@ a:focus-visible {
   transform: translateY(-2px);
 }
 
+/* iPhone SE y dispositivos muy pequeños */
 @media (max-width: 374px) {
   .content-container {
     padding: 0 0.5rem;
@@ -204,10 +226,27 @@ a:focus-visible {
   
   .fullpage-section {
     padding: 0.5rem 0;
+    min-height: calc(100vh - 4rem);
   }
   
   :root {
     --nav-height: 3.5rem;
+  }
+}
+
+/* iPhone 13 y dispositivos similares (390px) */
+@media (min-width: 375px) and (max-width: 430px) {
+  .content-container {
+    padding: 0 0.75rem;
+  }
+  
+  .fullpage-section {
+    padding: 0.75rem 0;
+    min-height: calc(100vh - 4rem);
+  }
+  
+  :root {
+    --nav-height: 4rem;
   }
 }
 
@@ -230,6 +269,11 @@ a:focus-visible {
     padding: 1rem 0;
     height: auto;
     min-height: 100vh;
+  }
+  
+  /* Mejorar touch targets en móviles */
+  button, a {
+    min-height: 44px;
   }
 }
 
@@ -287,8 +331,23 @@ body.overflow-hidden {
   }
   
   .mobile-nav-link {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
+    padding: 1rem 1.5rem;
+    margin-bottom: 0.75rem;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Mejores touch targets para móviles pequeños */
+  button {
+    min-height: 48px;
     padding: 0.75rem 1rem;
-    margin-bottom: 0.5rem;
+  }
+  
+  /* Mejor espaciado para touch */
+  .content-container {
+    padding: 0 1rem;
   }
 }

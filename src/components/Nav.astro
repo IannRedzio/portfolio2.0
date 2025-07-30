@@ -16,8 +16,8 @@ const menuItems: MenuItem[] = [
 <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-[#0E0E29]/90 backdrop-blur-sm h-[var(--nav-height)] border-b border-gray-200/50 dark:border-white/10">
   <nav class="w-full h-full flex items-center px-4 lg:px-8">
     <div class="max-w-5xl mx-auto w-full flex justify-between md:justify-end items-center gap-8">
-      <button id="mobile-menu-button" class="md:hidden text-gray-800 dark:text-white focus:outline-none z-50 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10" aria-label="Abrir menú">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <button id="mobile-menu-button" class="md:hidden text-gray-800 dark:text-white focus:outline-none z-50 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 min-h-[48px] min-w-[48px] flex items-center justify-center" aria-label="Abrir menú">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
@@ -88,18 +88,18 @@ const menuItems: MenuItem[] = [
   <div id="menu-overlay" class="absolute inset-0 w-full h-full"></div>
   
   <div class="flex flex-col h-full relative z-10">
-    <button id="close-menu-button" class="absolute top-4 right-4 text-gray-800 dark:text-white p-2 focus:outline-none rounded-lg hover:bg-gray-100 dark:hover:bg-white/10" aria-label="Cerrar menú">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <button id="close-menu-button" class="absolute top-4 right-4 text-gray-800 dark:text-white p-3 focus:outline-none rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 min-h-[48px] min-w-[48px] flex items-center justify-center" aria-label="Cerrar menú">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
     
-    <div class="flex flex-col items-center justify-center flex-grow gap-6 py-12">
+    <div class="flex flex-col items-center justify-center flex-grow gap-8 py-16">
       {
         menuItems.map((item) => (
           <a
             href={item.url}
-            class="text-gray-700 dark:text-white/90 hover:text-gray-900 dark:hover:text-white transition-all duration-300 hover:scale-105 text-xl font-medium tracking-wide py-2 px-4 mobile-nav-link relative"
+            class="text-gray-700 dark:text-white/90 hover:text-gray-900 dark:hover:text-white transition-all duration-300 hover:scale-105 text-2xl font-medium tracking-wide py-4 px-6 mobile-nav-link relative min-h-[56px] flex items-center justify-center w-full max-w-xs"
           >
             {item.name}
           </a>
@@ -111,7 +111,7 @@ const menuItems: MenuItem[] = [
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Descargar CV"
-        class="inline-flex items-center gap-3 px-6 py-3 mt-4 rounded-lg border-2 border-blue-600 bg-white dark:bg-[#0E0E29] text-blue-700 dark:text-blue-300 font-semibold shadow-lg hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 text-lg"
+        class="inline-flex items-center gap-3 px-8 py-4 mt-6 rounded-lg border-2 border-blue-600 bg-white dark:bg-[#0E0E29] text-blue-700 dark:text-blue-300 font-semibold shadow-lg hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 text-xl min-h-[56px]"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />

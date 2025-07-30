@@ -10,53 +10,22 @@ interface Props {
 const { title, company, period, description, skills } = Astro.props;
 ---
 
-<div class="bg-white dark:bg-[rgba(14,14,41,0.6)] border border-gray-200 dark:border-[rgba(85,193,255,0.1)] rounded-xl p-4 sm:p-5 md:p-6 backdrop-blur-md h-full flex flex-col card-shadow hover:card-shadow-hover hover:translate-y-[-8px] hover:border-gray-300 dark:hover:border-[rgba(85,193,255,0.3)] group">
-  <div class="flex justify-end mb-2 sm:mb-3">
+<div class="bg-white dark:bg-[rgba(14,14,41,0.6)] border border-gray-200 dark:border-[rgba(85,193,255,0.1)] rounded-xl p-5 sm:p-5 md:p-6 backdrop-blur-md h-full flex flex-col card-shadow hover:card-shadow-hover hover:translate-y-[-8px] hover:border-gray-300 dark:hover:border-[rgba(85,193,255,0.3)] group">
+  <div class="flex justify-end mb-4 sm:mb-3">
     <div>
-      <span class="text-blue-600 dark:text-blue-300 text-[0.65rem] xs:text-xs sm:text-sm font-medium bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded-md">{period}</span>
+      <span class="text-blue-600 dark:text-blue-300 text-sm sm:text-sm font-medium bg-blue-50 dark:bg-blue-900/30 px-3 py-2 sm:px-2 sm:py-1 rounded-md">{period}</span>
     </div>
   </div>
   <div class="flex flex-col flex-1">
-    <h3 class="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{title}</h3>
-    <p class="text-blue-600 dark:text-yellow-300 font-medium text-[0.65rem] xs:text-xs sm:text-sm mb-1 sm:mb-2">{company}</p>
-    <p class="text-gray-700 dark:text-white/80 text-[0.65rem] xs:text-xs sm:text-sm mb-2 sm:mb-3 leading-snug sm:leading-normal">{description}</p>
-    <div class="flex flex-wrap gap-1 mt-auto">
+    <h3 class="text-lg sm:text-base font-bold text-gray-900 dark:text-white mb-3 sm:mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-tight">{title}</h3>
+    <p class="text-blue-600 dark:text-yellow-300 font-medium text-base sm:text-sm mb-3 sm:mb-2">{company}</p>
+    <p class="text-gray-700 dark:text-white/80 text-base sm:text-sm mb-4 sm:mb-3 leading-relaxed">{description}</p>
+    <div class="flex flex-wrap gap-2.5 sm:gap-1 mt-auto">
       {skills.map((skill) => (
-        <span class="inline-block bg-blue-100 dark:bg-[rgba(14,28,85,0.4)] text-blue-800 dark:text-[#55c1ff] text-[0.55rem] xs:text-[0.625rem] sm:text-xs rounded-full px-2 py-0.5 xs:px-2 sm:px-3 sm:py-1 mb-1 border border-blue-200 dark:border-blue-500/30 hover:bg-blue-200 dark:hover:bg-[rgba(14,28,85,0.6)] hover:scale-105 transition-all duration-200 cursor-default">{skill}</span>
+        <span class="inline-block bg-blue-100 dark:bg-[rgba(14,28,85,0.4)] text-blue-800 dark:text-[#55c1ff] text-sm sm:text-xs rounded-full px-3 py-2 sm:px-3 sm:py-1 mb-2 sm:mb-1 border border-blue-200 dark:border-blue-500/30 hover:bg-blue-200 dark:hover:bg-[rgba(14,28,85,0.6)] hover:scale-105 transition-all duration-200 cursor-default">{skill}</span>
       ))}
     </div>
   </div>
 </div>
 
-<style>
-  @media (max-width: 374px) {
-    :global(.text-\[0\.55rem\]) {
-      font-size: 0.55rem;
-    }
-    
-    :global(.text-\[0\.65rem\]) {
-      font-size: 0.65rem;
-    }
-  }
-  
-  @media (min-width: 375px) and (max-width: 480px) {
-    :global(.xs\:text-xs) {
-      font-size: 0.75rem;
-    }
-    
-    :global(.xs\:text-\[0\.625rem\]) {
-      font-size: 0.625rem;
-    }
-    
-    :global(.xs\:px-2) {
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .content-container {
-      padding: 0.5rem;
-    }
-  }
-</style> 
+ 

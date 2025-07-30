@@ -46,7 +46,7 @@ const experiences: Experience[] = [
     <span class="border-b-2 border-blue-500 dark:border-blue-400 pb-1">Experiencia Profesional</span>
   </h2>
   
-  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4 md:gap-6 w-full max-w-[1200px] mx-auto px-2 sm:px-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-4 md:gap-6 w-full max-w-[1200px] mx-auto px-4 sm:px-4">
     {experiences.map((experience) => (
       <ExperienceCard 
         title={experience.title}
@@ -59,21 +59,4 @@ const experiences: Experience[] = [
   </div>
 </section>
 
-<style>
-  /* Estilos responsivos */
-  @media (max-width: 480px) {
-    .content-container {
-      padding: 0 0.75rem;
-    }
-    
-    :global(.grid-cols-1) {
-      grid-template-columns: repeat(1, minmax(0, 1fr));
-    }
-  }
-  
-  @media (min-width: 481px) and (max-width: 639px) {
-    .content-container {
-      padding: 0 1rem;
-    }
-  }
-</style> 
+ 

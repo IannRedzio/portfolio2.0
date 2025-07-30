@@ -50,11 +50,11 @@ const projects: Project[] = [
     <span class="border-b-2 border-blue-500 dark:border-blue-400 pb-1">Proyectos destacados</span>
   </h2>
   
-  <div class="max-w-7xl mx-auto overflow-y-auto max-h-[calc(100vh-var(--nav-height)-5rem)] md:max-h-none px-1 sm:px-2 md:px-4">
-    <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 xl:gap-4">
+  <div class="max-w-7xl mx-auto overflow-y-auto max-h-[calc(100vh-var(--nav-height)-5rem)] md:max-h-none px-2 sm:px-3 md:px-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-3 xl:gap-4">
       {projects.map(project => (
-        <div class="bg-white dark:bg-[#131339]/50 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-white/10 overflow-hidden flex flex-col h-[270px] sm:h-[290px] md:h-[320px] xl:h-[360px] card-shadow hover:card-shadow-hover hover:translate-y-[-4px] transition-all duration-300 group">
-          <div class="h-16 sm:h-20 md:h-28 xl:h-32 bg-gray-100 dark:bg-gray-800 overflow-hidden">
+        <div class="bg-white dark:bg-[#131339]/50 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-white/10 overflow-hidden flex flex-col h-80 sm:h-[290px] md:h-[320px] xl:h-[360px] card-shadow hover:card-shadow-hover hover:translate-y-[-4px] transition-all duration-300 group">
+          <div class="h-24 sm:h-20 md:h-28 xl:h-32 bg-gray-100 dark:bg-gray-800 overflow-hidden">
             <img 
               src={typeof project.image === 'string' ? project.image : project.image.src} 
               alt={`Miniatura de ${project.title}`} 
@@ -62,22 +62,22 @@ const projects: Project[] = [
             />
           </div>
           
-          <div class="p-2 sm:p-3 md:p-4 flex-1 flex flex-col justify-between">
+          <div class="p-4 sm:p-3 md:p-4 flex-1 flex flex-col justify-between">
             <div>
-              <h3 class="text-xs sm:text-sm md:text-base xl:text-lg font-bold text-gray-900 dark:text-white mb-1 md:mb-2 truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{project.title}</h3>
+              <h3 class="text-base sm:text-sm md:text-base xl:text-lg font-bold text-gray-900 dark:text-white mb-3 sm:mb-1 md:mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-tight">{project.title}</h3>
               
-              <p class="text-gray-600 dark:text-white/80 text-[10px] sm:text-xs md:text-sm line-clamp-2 md:line-clamp-3 mb-1 md:mb-2">
+              <p class="text-gray-600 dark:text-white/80 text-sm sm:text-xs md:text-sm line-clamp-3 sm:line-clamp-2 md:line-clamp-3 mb-4 sm:mb-1 md:mb-2 leading-relaxed">
                 {project.description}
               </p>
             </div>
             
             <div class="mt-auto">
-              <div class="flex flex-wrap gap-1 md:gap-1.5 mb-2 md:mb-3">
+              <div class="flex flex-wrap gap-2 sm:gap-1 md:gap-1.5 mb-4 sm:mb-2 md:mb-3">
                 {project.tags.map((tag, index) => (
                   <span 
                     class={`
-                      text-[8px] sm:text-[9px] md:text-xs 
-                      px-1.5 md:px-2 py-0.5 
+                      text-xs sm:text-[9px] md:text-xs 
+                      px-2 sm:px-1.5 md:px-2 py-1 sm:py-0.5 
                       bg-blue-100 dark:bg-[#0E0E29] text-blue-700 dark:text-blue-300 rounded-full
                       border border-blue-200 dark:border-blue-500/30
                       hover:bg-blue-200 dark:hover:bg-blue-900/40 hover:scale-105 transition-all duration-200
@@ -90,26 +90,26 @@ const projects: Project[] = [
                 ))}
                 
                 {project.tags.length > 2 && (
-                  <span class="text-[8px] sm:text-[9px] md:text-xs px-1 py-0.5 text-gray-500 dark:text-white/60 lg:hidden">
+                  <span class="text-xs sm:text-[9px] md:text-xs px-2 py-1 text-gray-500 dark:text-white/60 lg:hidden">
                     +{project.tags.length - 2}
                   </span>
                 )}
                 
                 {project.tags.length > 3 && (
-                  <span class="text-[8px] sm:text-[9px] md:text-xs px-1 py-0.5 text-gray-500 dark:text-white/60 hidden lg:inline-block">
+                  <span class="text-xs sm:text-[9px] md:text-xs px-2 py-1 text-gray-500 dark:text-white/60 hidden lg:inline-block">
                     +{project.tags.length - 3}
                   </span>
                 )}
               </div>
               
-              <div class="flex gap-2 flex-wrap">
+              <div class="flex gap-2 sm:gap-2 flex-wrap">
                 <a 
                   href={project.url} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  class="inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 md:px-3 md:py-2 bg-blue-600 hover:bg-blue-700 text-white text-[9px] sm:text-[10px] md:text-xs font-medium rounded-lg transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                  class="inline-flex items-center gap-2 sm:gap-1.5 px-4 py-3 sm:px-3 sm:py-2 md:px-3 md:py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-[10px] md:text-xs font-medium rounded-lg transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 min-h-[44px] sm:min-h-auto"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-3.5 sm:w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
                   Ver proyecto
@@ -119,9 +119,9 @@ const projects: Project[] = [
                   href={project.code} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  class="inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 md:px-3 md:py-2 bg-gray-600 hover:bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 text-white text-[9px] sm:text-[10px] md:text-xs font-medium rounded-lg transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                  class="inline-flex items-center gap-2 sm:gap-1.5 px-4 py-3 sm:px-3 sm:py-2 md:px-3 md:py-2 bg-gray-600 hover:bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 text-white text-sm sm:text-[10px] md:text-xs font-medium rounded-lg transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 min-h-[44px] sm:min-h-auto"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-3.5 sm:w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
                   Ver código
@@ -146,31 +146,4 @@ const projects: Project[] = [
   });
 </script>
 
-<style>
-  @media (max-width: 480px) {
-    .content-container {
-      padding: 0 0.5rem;
-    }
-    
-    :global(.xs\:grid-cols-2) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    
-    :global(.xs\:px-2) {
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-    }
-  }
-  
-  @media (min-width: 481px) and (max-width: 1400px) {
-    .content-container {
-      padding: 0 0.75rem;
-    }
-  }
-  
-  @media (min-width: 1401px) {
-    .content-container {
-      padding: 0 1rem;
-    }
-  }
-</style> 
+ 
