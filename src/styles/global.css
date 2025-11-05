@@ -96,12 +96,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-* {
-  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
-  transition-duration: 0.3s;
-  transition-timing-function: ease;
-}
-
 .fullpage-container {
   height: 100vh;
   width: 100%;
