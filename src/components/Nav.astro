@@ -13,6 +13,14 @@ const menuItems: MenuItem[] = [
 ];
 ---
 
+<!-- Skip to main content link para accesibilidad -->
+<a
+  href="#main-container"
+  class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:shadow-lg"
+>
+  Saltar al contenido principal
+</a>
+
 <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-[#0E0E29]/90 backdrop-blur-sm h-[var(--nav-height)] border-b border-gray-200/50 dark:border-white/10">
   <nav class="w-full h-full flex items-center px-4 lg:px-8">
     <div class="max-w-5xl mx-auto w-full flex justify-between md:justify-end items-center gap-8">
@@ -177,14 +185,21 @@ const menuItems: MenuItem[] = [
         document.body.classList.add('overflow-hidden');
         mobileMenu.classList.add('opacity-100');
         mobileMenu.classList.remove('pointer-events-none');
+
+        // Mover el foco al botón de cerrar cuando se abre el menú
+        setTimeout(() => {
+          closeMenuButton?.focus();
+        }, 100);
       };
-      
+
       const closeMenu = () => {
         mobileMenu.classList.remove('opacity-100');
         mobileMenu.classList.add('pointer-events-none');
-        
+
         setTimeout(() => {
           document.body.classList.remove('overflow-hidden');
+          // Devolver el foco al botón que abrió el menú
+          mobileMenuButton?.focus();
         }, 300);
       };
       
@@ -194,7 +209,14 @@ const menuItems: MenuItem[] = [
       if (menuOverlay) {
         menuOverlay.addEventListener('click', closeMenu);
       }
-      
+
+      // Cerrar menú con la tecla Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('opacity-100')) {
+          closeMenu();
+        }
+      });
+
       mobileNavLinks.forEach(link => {
         link.addEventListener('click', () => {
           closeMenu();
