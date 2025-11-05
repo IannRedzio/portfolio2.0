@@ -218,14 +218,15 @@ const menuItems: MenuItem[] = [
       });
 
       mobileNavLinks.forEach(link => {
-        link.addEventListener('click', () => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
           closeMenu();
-          
+
           const targetId = link.getAttribute('href')?.substring(1);
-          
+
           if (targetId && mainContainer) {
             const targetSection = document.getElementById(targetId);
-            
+
             if (targetSection) {
               setTimeout(() => {
                 mainContainer.scrollTo({
