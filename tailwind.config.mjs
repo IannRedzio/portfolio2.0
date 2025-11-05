@@ -8,16 +8,29 @@ export default {
         'xs': '475px',
       },
       colors: {
-        'primary': '#0E0E29', 
-        'primary-dark': '#080818', 
-        'accent': '#55c1ff',  
-        'secondary': '#FFFFFF', 
-        'highlight': '#FBBF24', 
-        'light-primary': '#FFFFFF',
-        'light-primary-dark': '#F8F9FA',
-        'light-secondary': '#1F2937',
-        'light-accent': '#3B82F6',
-        'light-highlight': '#F59E0B',
+        // Sistema de colores dark (por defecto)
+        primary: {
+          DEFAULT: '#0E0E29',
+          dark: '#080818',
+          light: '#1A1A3E',
+        },
+        accent: {
+          DEFAULT: '#3B82F6',
+          light: '#60A5FA',
+          dark: '#2563EB',
+          cyan: '#55c1ff',
+        },
+        highlight: {
+          DEFAULT: '#FBBF24',
+          light: '#FCD34D',
+          dark: '#F59E0B',
+        },
+        // Modo claro
+        light: {
+          primary: '#FFFFFF',
+          'primary-dark': '#F8F9FA',
+          secondary: '#1F2937',
+        }
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
