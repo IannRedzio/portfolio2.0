@@ -69,11 +69,12 @@ export function initFullpageNavigation(): void {
         top: targetPosition,
         behavior: 'smooth'
       });
-      
-      if (targetSection.id) {
-        history.replaceState(null, '', `#${targetSection.id}`);
-      }
-      
+
+      // Comentado para mantener URLs limpias sin hashes
+      // if (targetSection.id) {
+      //   history.replaceState(null, '', `#${targetSection.id}`);
+      // }
+
       setTimeout(() => {
         state.isNavigating = false;
       }, 800);
