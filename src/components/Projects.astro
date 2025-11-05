@@ -51,22 +51,24 @@ const projects: Project[] = [
   </h2>
   
   <div class="max-w-7xl mx-auto overflow-y-auto max-h-[calc(100vh-var(--nav-height)-5rem)] md:max-h-none px-2 sm:px-3 md:px-4">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-3 xl:gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {projects.map(project => (
         <div class="bg-white dark:bg-[#131339]/50 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-white/10 overflow-hidden flex flex-col h-80 sm:h-[290px] md:h-[320px] xl:h-[360px] card-shadow hover:card-shadow-hover hover:translate-y-[-4px] transition-all duration-300 group">
           <div class="h-24 sm:h-20 md:h-28 xl:h-32 bg-gray-100 dark:bg-gray-800 overflow-hidden">
-            <img 
-              src={typeof project.image === 'string' ? project.image : project.image.src} 
-              alt={`Miniatura de ${project.title}`} 
+            <img
+              src={typeof project.image === 'string' ? project.image : project.image.src}
+              alt={`Miniatura de ${project.title}`}
+              loading="lazy"
+              decoding="async"
               class="w-full h-full object-cover opacity-90 hover:opacity-100 group-hover:scale-105 transition-all duration-300"
             />
           </div>
           
           <div class="p-4 sm:p-3 md:p-4 flex-1 flex flex-col justify-between">
             <div>
-              <h3 class="text-base sm:text-sm md:text-base xl:text-lg font-bold text-gray-900 dark:text-white mb-3 sm:mb-1 md:mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-tight">{project.title}</h3>
-              
-              <p class="text-gray-600 dark:text-white/80 text-sm sm:text-xs md:text-sm line-clamp-3 sm:line-clamp-2 md:line-clamp-3 mb-4 sm:mb-1 md:mb-2 leading-relaxed">
+              <h3 class="text-sm sm:text-base md:text-base lg:text-lg font-bold text-gray-900 dark:text-white mb-3 sm:mb-1 md:mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-tight">{project.title}</h3>
+
+              <p class="text-gray-600 dark:text-white/80 text-xs sm:text-sm md:text-sm line-clamp-3 sm:line-clamp-2 md:line-clamp-3 mb-4 sm:mb-1 md:mb-2 leading-relaxed">
                 {project.description}
               </p>
             </div>
