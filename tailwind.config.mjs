@@ -25,7 +25,11 @@ export default {
           light: '#FCD34D',
           dark: '#F59E0B',
         },
-        // Modo claro
+        // Modo claro: papel frío derivado del navy de marca
+        paper: { DEFAULT: '#EEF0F6', raised: '#F7F8FB', sunk: '#E4E7F0' },
+        ink: { DEFAULT: '#1B1D3A', soft: '#464A66', muted: '#62667F' },
+        line: { DEFAULT: '#D8DCE8', strong: '#C3C8DA' },
+        brand: { DEFAULT: '#3047A6', hover: '#253A8C', tint: '#E3E7F6' },
         light: {
           primary: '#FFFFFF',
           'primary-dark': '#F8F9FA',
