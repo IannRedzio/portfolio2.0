@@ -142,8 +142,8 @@ const projects: Project[] = [
     const projectImages = document.querySelectorAll('.grid img');
     projectImages.forEach(img => {
       img.addEventListener('error', () => {
-        (img as HTMLImageElement).src = "https://via.placeholder.com/800x400/131339/55c1ff?text=Proyecto";
-      });
+        (img as HTMLImageElement).src = '/images/placeholder.svg';
+      }, { once: true });
     });
   });
 </script>
