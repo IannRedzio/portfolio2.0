@@ -10,7 +10,7 @@ interface Props {
 const { title, company, period, description, skills } = Astro.props;
 ---
 
-<div class="bg-paper-raised dark:bg-night-raised border border-line dark:border-night-line rounded-xl p-5 sm:p-5 md:p-6 backdrop-blur-md h-full flex flex-col card-shadow hover:card-shadow-hover hover:translate-y-[-8px] hover:border-line-strong dark:hover:border-night-line-strong group">
+<div class="bg-paper-raised/75 dark:bg-night-raised/60 border border-line dark:border-night-line rounded-xl p-5 sm:p-5 md:p-6 backdrop-blur-md h-full flex flex-col card-shadow hover:card-shadow-hover hover:translate-y-[-8px] hover:border-line-strong dark:hover:border-night-line-strong group">
   <div class="flex justify-end mb-4 sm:mb-3">
     <div>
       <span class="text-brand dark:text-brand-night text-sm sm:text-sm font-medium bg-brand-tint dark:bg-brand-night-tint px-3 py-2 sm:px-2 sm:py-1 rounded-md">{period}</span>
