@@ -1,87 +1,71 @@
 ---
-import { siGithub } from 'simple-icons';
-import EmailIcon from '../icons/EmailIcon.astro';
-import LinkedinIcon from '../icons/LinkedinIcon.astro';
-
 const email = 'ianredzio13@gmail.com';
 const year = new Date().getFullYear();
 
 const links = [
-  { name: 'LinkedIn', href: 'https://linkedin.com/in/ian-redzio', handle: 'in/ian-redzio', icon: 'linkedin' },
-  { name: 'GitHub', href: 'https://github.com/IannRedzio', handle: '@IannRedzio', icon: 'github' },
-  { name: 'CV', href: '/Ian-Redzio-CV-DevFullStack.pdf', handle: 'Descargar PDF', icon: 'cv' },
+  { label: 'LinkedIn', value: 'in/ian-redzio', href: 'https://linkedin.com/in/ian-redzio' },
+  { label: 'GitHub', value: '@IannRedzio', href: 'https://github.com/IannRedzio' },
+  { label: 'Currículum', value: 'Descargar PDF', href: '/Ian-Redzio-CV-DevFullStack.pdf' },
 ];
 ---
 
 <section class="content-container smooth-transition py-6 md:py-10 flex flex-col min-h-full">
-  <div class="flex-1 flex flex-col justify-center max-w-2xl mx-auto w-full px-4 sm:px-6 text-center">
-    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-ink dark:text-mist leading-tight mb-4">
-      ¿Trabajamos <span class="text-brand dark:text-signal">juntos</span>?
-    </h2>
-    <p class="text-ink-soft dark:text-mist-soft text-base sm:text-lg mb-8 md:mb-10">
-      Estoy abierto a nuevas oportunidades y proyectos. Escríbeme y te respondo a la brevedad.
-    </p>
+  <div class="flex-1 grid md:grid-cols-[1.1fr_1fr] gap-10 md:gap-16 items-center max-w-5xl mx-auto w-full px-4">
+    <div>
+      <p class="text-sm uppercase tracking-[0.25em] text-brand dark:text-brand-night font-semibold mb-4">Contacto</p>
+      <h2 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-ink dark:text-mist leading-[0.95] tracking-tight mb-6">
+        Hablemos<span class="text-brand dark:text-signal">.</span>
+      </h2>
+      <p class="text-ink-soft dark:text-mist-soft text-lg max-w-sm mb-8">
+        ¿Tienes un proyecto o una propuesta? Escríbeme y te respondo a la brevedad.
+      </p>
 
-    <!-- Email destacado con botón de copiar -->
-    <div class="flex flex-col sm:flex-row items-stretch gap-3 mb-6">
-      <a
-        href={`mailto:${email}`}
-        class="flex-1 inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-brand hover:bg-brand-hover text-white dark:bg-brand-night dark:text-night dark:hover:bg-brand-night-hover font-semibold text-base sm:text-lg shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 min-h-[56px]"
-      >
-        <EmailIcon />
-        <span class="break-all">{email}</span>
-      </a>
-      <button
-        type="button"
-        id="copy-email"
-        data-email={email}
-        class="inline-flex items-center justify-center gap-2 px-5 py-4 rounded-xl border-2 border-brand dark:border-brand-night text-brand dark:text-brand-night bg-paper-raised/75 dark:bg-night-raised/60 backdrop-blur-sm hover:bg-brand-tint dark:hover:bg-brand-night-tint font-medium transition-all duration-200 min-h-[56px]"
-        aria-label="Copiar email al portapapeles"
-      >
-        <svg data-icon="copy" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-        </svg>
-        <svg data-icon="check" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-        </svg>
-        <span data-label>Copiar</span>
-      </button>
-    </div>
-    <p id="copy-status" class="sr-only" aria-live="polite"></p>
-
-    <!-- Otros canales -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-      {links.map((link) => (
-        <a
-          href={link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="group flex items-center gap-3 p-4 rounded-xl bg-paper-raised/75 dark:bg-night-raised/60 backdrop-blur-sm border border-line dark:border-night-line hover:border-line-strong dark:hover:border-night-line-strong card-shadow hover:card-shadow-hover hover:-translate-y-0.5 transition-all duration-200 text-left"
-        >
-          <span class="flex items-center justify-center w-10 h-10 rounded-lg bg-brand-tint dark:bg-brand-night-tint text-brand dark:text-brand-night shrink-0">
-            {link.icon === 'linkedin' && <LinkedinIcon />}
-            {link.icon === 'github' && (
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d={siGithub.path} />
-              </svg>
-            )}
-            {link.icon === 'cv' && (
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-            )}
-          </span>
-          <span class="min-w-0">
-            <span class="block font-semibold text-ink dark:text-mist group-hover:text-brand dark:group-hover:text-brand-night transition-colors">{link.name}</span>
-            <span class="block text-sm text-ink-muted dark:text-mist-muted truncate">{link.handle}</span>
-          </span>
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-3">
+        <a href={`mailto:${email}`} class="group inline-flex items-center gap-3 text-xl sm:text-2xl font-semibold text-ink dark:text-mist">
+          <span class="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_2px] bg-left-bottom bg-no-repeat group-hover:bg-[length:100%_2px] transition-[background-size] duration-300 pb-1 break-all">{email}</span>
+          <span class="text-brand dark:text-brand-night transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true">↗</span>
         </a>
-      ))}
+        <button
+          type="button"
+          id="copy-email"
+          data-email={email}
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium text-ink-soft dark:text-mist-soft border border-line dark:border-night-line-strong hover:text-brand dark:hover:text-brand-night hover:border-brand dark:hover:border-brand-night transition-colors"
+          aria-label="Copiar email al portapapeles"
+        >
+          <svg data-icon="copy" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <svg data-icon="check" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          <span data-label>Copiar</span>
+        </button>
+      </div>
+      <p id="copy-status" class="sr-only" aria-live="polite"></p>
     </div>
+
+    <ul class="border-t border-line dark:border-night-line-strong">
+      {links.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group flex items-center justify-between py-5 md:py-6 border-b border-line dark:border-night-line-strong"
+          >
+            <span>
+              <span class="block text-xl md:text-2xl font-semibold text-ink dark:text-mist group-hover:text-brand dark:group-hover:text-brand-night transition-colors">{link.label}</span>
+              <span class="block text-sm text-ink-muted dark:text-mist-muted">{link.value}</span>
+            </span>
+            <span class="text-2xl text-ink-muted dark:text-mist-muted group-hover:text-brand dark:group-hover:text-brand-night transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true">↗</span>
+          </a>
+        </li>
+      ))}
+    </ul>
   </div>
 
   <footer class="pt-8 text-center text-sm text-ink-muted dark:text-mist-muted">
-    © {year} Ian Redzio · Hecho con Astro y Tailwind CSS
+    © {year} Ian Redzio · Buenos Aires, Argentina
   </footer>
 </section>
 
@@ -100,7 +84,7 @@ const links = [
       try {
         await navigator.clipboard.writeText(email);
       } catch {
-        // Fallback para navegadores sin Clipboard API o contextos no seguros
+        // Alternativa para navegadores sin Clipboard API o contextos no seguros
         const input = document.createElement('textarea');
         input.value = email;
         input.style.position = 'fixed';
