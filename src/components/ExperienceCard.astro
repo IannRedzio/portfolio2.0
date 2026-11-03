@@ -10,19 +10,19 @@ interface Props {
 const { title, company, period, description, skills } = Astro.props;
 ---
 
-<div class="bg-paper-raised dark:bg-[rgba(14,14,41,0.6)] border border-line dark:border-[rgba(85,193,255,0.1)] rounded-xl p-5 sm:p-5 md:p-6 backdrop-blur-md h-full flex flex-col card-shadow hover:card-shadow-hover hover:translate-y-[-8px] hover:border-line-strong dark:hover:border-[rgba(85,193,255,0.3)] group">
+<div class="bg-paper-raised dark:bg-night-raised border border-line dark:border-night-line rounded-xl p-5 sm:p-5 md:p-6 backdrop-blur-md h-full flex flex-col card-shadow hover:card-shadow-hover hover:translate-y-[-8px] hover:border-line-strong dark:hover:border-night-line-strong group">
   <div class="flex justify-end mb-4 sm:mb-3">
     <div>
-      <span class="text-brand dark:text-blue-300 text-sm sm:text-sm font-medium bg-brand-tint dark:bg-blue-900/30 px-3 py-2 sm:px-2 sm:py-1 rounded-md">{period}</span>
+      <span class="text-brand dark:text-brand-night text-sm sm:text-sm font-medium bg-brand-tint dark:bg-brand-night-tint px-3 py-2 sm:px-2 sm:py-1 rounded-md">{period}</span>
     </div>
   </div>
   <div class="flex flex-col flex-1">
-    <h3 class="text-lg sm:text-base font-bold text-ink dark:text-white mb-3 sm:mb-1 group-hover:text-brand dark:group-hover:text-blue-400 transition-colors leading-tight">{title}</h3>
-    <p class="text-brand dark:text-yellow-300 font-medium text-base sm:text-sm mb-3 sm:mb-2">{company}</p>
-    <p class="text-ink-soft dark:text-white/80 text-base sm:text-sm mb-4 sm:mb-3 leading-relaxed">{description}</p>
+    <h3 class="text-lg sm:text-base font-bold text-ink dark:text-mist mb-3 sm:mb-1 group-hover:text-brand dark:group-hover:text-brand-night transition-colors leading-tight">{title}</h3>
+    <p class="text-brand dark:text-brand-night font-medium text-base sm:text-sm mb-3 sm:mb-2">{company}</p>
+    <p class="text-ink-soft dark:text-mist-soft text-base sm:text-sm mb-4 sm:mb-3 leading-relaxed">{description}</p>
     <div class="flex flex-wrap gap-2.5 sm:gap-1 mt-auto">
       {skills.map((skill) => (
-        <span class="inline-block bg-transparent dark:bg-[rgba(14,28,85,0.4)] text-ink-soft dark:text-[#55c1ff] text-sm sm:text-xs rounded-full px-3 py-2 sm:px-3 sm:py-1 mb-2 sm:mb-1 border border-line dark:border-blue-500/30 hover:bg-paper-sunk dark:hover:bg-[rgba(14,28,85,0.6)] hover:scale-105 transition-all duration-200 cursor-default">{skill}</span>
+        <span class="inline-block bg-transparent dark:bg-transparent text-ink-soft dark:text-mist-soft text-sm sm:text-xs rounded-full px-3 py-2 sm:px-3 sm:py-1 mb-2 sm:mb-1 border border-line dark:border-night-line-strong hover:bg-paper-sunk dark:hover:bg-white/5 hover:scale-105 transition-all duration-200 cursor-default">{skill}</span>
       ))}
     </div>
   </div>

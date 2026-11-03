@@ -29,7 +29,11 @@ export default {
         paper: { DEFAULT: '#EEF0F6', raised: '#F7F8FB', sunk: '#E4E7F0' },
         ink: { DEFAULT: '#1B1D3A', soft: '#464A66', muted: '#62667F' },
         line: { DEFAULT: '#D8DCE8', strong: '#C3C8DA' },
-        brand: { DEFAULT: '#3047A6', hover: '#253A8C', tint: '#E3E7F6' },
+        brand: { DEFAULT: '#3047A6', hover: '#253A8C', tint: '#E3E7F6', night: '#8B9CFF', 'night-hover': '#A7B4FF', 'night-tint': '#1D2150' },
+        // Modo oscuro: medianoche derivada del mismo navy
+        night: { DEFAULT: '#0E0E29', raised: '#15153A', line: '#25254A', 'line-strong': '#36365F' },
+        mist: { DEFAULT: '#ECEDF7', soft: '#B8BAD4', muted: '#8E91B0' },
+        signal: '#F5C451',
         light: {
           primary: '#FFFFFF',
           'primary-dark': '#F8F9FA',
