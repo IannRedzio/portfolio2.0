@@ -2,22 +2,82 @@
 
 Portfolio personal desarrollado con **Astro** y **Tailwind CSS**, presentando mis proyectos, experiencia profesional y habilidades técnicas como Desarrollador Full Stack.
 
-![Portfolio Preview](public/images/Portfolio.png)
+🔗 **Demo:** [ianredzio-portfolio.vercel.app](https://ianredzio-portfolio.vercel.app/)
+
+| Modo oscuro | Modo claro |
+| --- | --- |
+| ![Vista previa en modo oscuro](public/images/Portfolio.webp) | ![Vista previa en modo claro](docs/preview-light.webp) |
 
 ## ✨ Características
 
-- 🌓 **Modo Oscuro/Claro**: Toggle completo con persistencia en localStorage y detección de preferencia del sistema
-- 📱 **Diseño Responsivo**: Optimizado para todos los dispositivos (móvil, tablet, desktop)
-- ⚡ **Rendimiento Optimizado**: Construido con Astro para máxima velocidad de carga
-- 🎨 **Animaciones Suaves**: Transiciones fluidas y efectos hover interactivos
-- ♿ **Accesibilidad**: Focus states, aria-labels y navegación por teclado
-- 📄 **Descarga de CV**: Botón integrado para descargar curriculum vitae
-- 🔍 **SEO Optimizado**: Meta tags y estructura semántica
+- 🌌 **Fondo animado**: auroras de color que se desplazan lentamente, grilla en movimiento, brillo que sigue al cursor y textura de grano. Solo anima `transform`/`opacity` y se detiene con `prefers-reduced-motion`
+- 🖱️ **Navegación por secciones**: scroll a pantalla completa con rueda del mouse, swipe en móviles y menú con indicador de sección activa
+- 🌓 **Modo oscuro/claro**: paletas derivadas del mismo navy de marca, con la preferencia guardada en `localStorage` (arranca en oscuro)
+- ⌨️ **Efecto de escritura** en la presentación del hero
+- 📱 **Diseño responsivo**: optimizado para móvil, tablet y desktop, con alturas `dvh` para las barras dinámicas de los navegadores móviles
+- ♿ **Accesibilidad**: link para saltar al contenido, focus visibles, `aria-label`, cierre del menú con `Esc` y movimiento reducido
+- 📄 **Descarga de CV** desde la barra de navegación
+- ⚡ **Sitio estático**: generado con Astro, sin JavaScript de framework en el cliente
 
-## 🛠️ Tecnologías Utilizadas
+## 🛠️ Tecnologías
 
-### Frontend
-- **[Astro](https://astro.build/)** - Framework web moderno para sitios estáticos
-- **[Tailwind CSS](https://tailwindcss.com/)** - Framework CSS utility-first
-- **[TypeScript](https://www.typescriptlang.org/)** - Superset tipado de JavaScript
-- **[Simple Icons](https://simpleicons.org/)** - Iconos SVG de tecnologías
+- **[Astro](https://astro.build/)**: framework para sitios estáticos
+- **[Tailwind CSS](https://tailwindcss.com/)**: estilos utility-first
+- **[TypeScript](https://www.typescriptlang.org/)**: tipado en componentes y scripts
+- **[Simple Icons](https://simpleicons.org/)**: íconos SVG de tecnologías
+
+## 📦 Instalación
+
+Requiere **Node.js 22.23.4 o superior** (lo exige Astro 7).
+
+```bash
+git clone https://github.com/IannRedzio/portfolio2.0.git
+cd portfolio2.0
+npm install
+npm run dev
+```
+
+El sitio queda disponible en `http://localhost:4321`.
+
+## 🧞 Scripts
+
+| Comando           | Acción                                              |
+| :---------------- | :-------------------------------------------------- |
+| `npm run dev`     | Inicia el servidor de desarrollo                    |
+| `npm run build`   | Genera el sitio estático en `./dist/`               |
+| `npm run preview` | Sirve el build localmente para revisarlo            |
+
+## 📁 Estructura
+
+```text
+├── public/
+│   ├── images/                  # Capturas de los proyectos
+│   └── Ian-Redzio-CV-DevFullStack.pdf
+├── docs/                        # Imágenes usadas solo en este README
+└── src/
+    ├── components/
+    │   ├── AnimatedBackground.astro   # Fondo animado
+    │   ├── Nav.astro                  # Navegación, menú móvil y cambio de tema
+    │   ├── Hero.astro                 # Presentación
+    │   ├── Experience.astro           # Datos de experiencia laboral
+    │   ├── AboutMe.astro
+    │   ├── TechStack.astro            # Listado de tecnologías
+    │   └── Projects.astro             # Datos de proyectos
+    ├── layouts/Layout.astro      # HTML base, meta tags y script de tema
+    ├── styles/global.css         # Variables de color y estilos de las secciones
+    ├── utils/fullpage-navigation.ts   # Navegación por secciones
+    └── pages/index.astro
+```
+
+## ✏️ Personalización
+
+- **Experiencia, proyectos y tecnologías**: editar los arrays al inicio de `Experience.astro`, `Projects.astro` y `TechStack.astro`.
+- **Colores**: la paleta está en `tailwind.config.mjs` (`paper`, `ink`, `brand`, `night`, `mist`, `signal`).
+- **Fondo animado**: la intensidad de cada aurora se ajusta con las variables `--aurora-*` en `AnimatedBackground.astro`.
+- **CV**: reemplazar el PDF en `public/` y actualizar el link en `Nav.astro`.
+
+## 📬 Contacto
+
+- **Email:** [ianredzio13@gmail.com](mailto:ianredzio13@gmail.com)
+- **LinkedIn:** [linkedin.com/in/ian-redzio](https://linkedin.com/in/ian-redzio)
+- **GitHub:** [@IannRedzio](https://github.com/IannRedzio)
