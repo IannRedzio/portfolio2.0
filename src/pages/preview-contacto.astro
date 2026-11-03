@@ -1,0 +1,14 @@
+---
+// Página temporal para comparar variantes; no se commitea
+import Layout from '../layouts/Layout.astro';
+import A from '../components/contact-variants/ContactTerminal.astro';
+import B from '../components/contact-variants/ContactEditorial.astro';
+import C from '../components/contact-variants/ContactCard.astro';
+---
+<Layout title="Preview contacto">
+  <main id="main-container" class="fullpage-container">
+    <div id="v-a" class="fullpage-section"><A /></div>
+    <div id="v-b" class="fullpage-section"><B /></div>
+    <div id="v-c" class="fullpage-section"><C /></div>
+  </main>
+</Layout>
