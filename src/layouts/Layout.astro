@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import AnimatedBackground from '../components/AnimatedBackground.astro';
 
 interface Props {
 	title?: string;
@@ -69,6 +70,7 @@ const {
     </script>
   </head>
   <body>
+    <AnimatedBackground />
     <slot />
   </body>
 </html>
