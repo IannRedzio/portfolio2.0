@@ -5,12 +5,28 @@ import AnimatedBackground from '../components/AnimatedBackground.astro';
 interface Props {
 	title?: string;
 	description?: string;
+	image?: string;
 }
 
 const { 
 	title = 'IR | Programador FullStack', 
-	description = 'Portfolio personal de Ian Redzio, Programador FullStack especializado en crear aplicaciones web.' 
+	description = 'Portfolio personal de Ian Redzio, Programador FullStack especializado en crear aplicaciones web.',
+	image = '/og-image.jpg'
 } = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const imageUrl = new URL(image, Astro.site);
+
+const personSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: 'Ian Redzio',
+	jobTitle: 'Desarrollador Full Stack',
+	url: Astro.site?.toString(),
+	email: 'mailto:ianredzio13@gmail.com',
+	address: { '@type': 'PostalAddress', addressLocality: 'Buenos Aires', addressCountry: 'AR' },
+	sameAs: ['https://linkedin.com/in/ian-redzio', 'https://github.com/IannRedzio'],
+};
 
 ---
 
@@ -22,6 +38,29 @@ const {
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" href="/sitemap.xml" />
+    <meta name="theme-color" content="#0E0E29" />
+
+    <!-- Open Graph: vista previa al compartir en LinkedIn, WhatsApp, etc. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Ian Redzio" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Portfolio de Ian Redzio, Desarrollador Full Stack" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
