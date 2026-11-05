@@ -16,7 +16,9 @@ Portfolio personal desarrollado con **Astro** y **Tailwind CSS**, presentando mi
 - ⌨️ **Efecto de escritura** en la presentación del hero
 - 📱 **Diseño responsivo**: optimizado para móvil, tablet y desktop, con alturas `dvh` para las barras dinámicas de los navegadores móviles
 - ♿ **Accesibilidad**: link para saltar al contenido, focus visibles, `aria-label`, cierre del menú con `Esc` y movimiento reducido
+- 📬 **Sección de contacto** con botón para copiar el email, links a LinkedIn y GitHub, y descarga del CV
 - 📄 **Descarga de CV** desde la barra de navegación
+- 🔍 **SEO y vista previa al compartir**: Open Graph, Twitter Card, URL canónica, datos estructurados (`Person`), `sitemap.xml` y `robots.txt`
 - ⚡ **Sitio estático**: generado con Astro, sin JavaScript de framework en el cliente
 
 ## 🛠️ Tecnologías
@@ -52,6 +54,8 @@ El sitio queda disponible en `http://localhost:4321`.
 ```text
 ├── public/
 │   ├── images/                  # Capturas de los proyectos
+│   ├── og-image.jpg             # Imagen de vista previa al compartir (1200×630)
+│   ├── robots.txt / sitemap.xml
 │   └── Ian-Redzio-CV-DevFullStack.pdf
 ├── docs/                        # Imágenes usadas solo en este README
 └── src/
@@ -62,7 +66,8 @@ El sitio queda disponible en `http://localhost:4321`.
     │   ├── Experience.astro           # Datos de experiencia laboral
     │   ├── AboutMe.astro
     │   ├── TechStack.astro            # Listado de tecnologías
-    │   └── Projects.astro             # Datos de proyectos
+    │   ├── Projects.astro             # Datos de proyectos
+    │   └── Contact.astro              # Contacto y pie de página
     ├── layouts/Layout.astro      # HTML base, meta tags y script de tema
     ├── styles/global.css         # Variables de color y estilos de las secciones
     ├── utils/fullpage-navigation.ts   # Navegación por secciones
@@ -74,7 +79,8 @@ El sitio queda disponible en `http://localhost:4321`.
 - **Experiencia, proyectos y tecnologías**: editar los arrays al inicio de `Experience.astro`, `Projects.astro` y `TechStack.astro`.
 - **Colores**: la paleta está en `tailwind.config.mjs` (`paper`, `ink`, `brand`, `night`, `mist`, `signal`).
 - **Fondo animado**: la intensidad de cada aurora se ajusta con las variables `--aurora-*` en `AnimatedBackground.astro`.
-- **CV**: reemplazar el PDF en `public/` y actualizar el link en `Nav.astro`.
+- **CV**: reemplazar el PDF en `public/` y actualizar el link en `Nav.astro` y `Contact.astro`.
+- **Dominio**: si cambia la URL del sitio, actualizar `site` en `astro.config.mjs`, `public/robots.txt` y `public/sitemap.xml`.
 
 ## 📬 Contacto
 

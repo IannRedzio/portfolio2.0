@@ -1,0 +1,112 @@
+---
+const email = 'ianredzio13@gmail.com';
+const year = new Date().getFullYear();
+
+const links = [
+  { label: 'LinkedIn', value: 'in/ian-redzio', href: 'https://linkedin.com/in/ian-redzio' },
+  { label: 'GitHub', value: '@IannRedzio', href: 'https://github.com/IannRedzio' },
+  { label: 'Currículum', value: 'Descargar PDF', href: '/Ian-Redzio-CV-DevFullStack.pdf' },
+];
+---
+
+<section class="content-container smooth-transition py-6 md:py-10 flex flex-col min-h-full">
+  <div class="flex-1 grid md:grid-cols-[1.1fr_1fr] gap-10 md:gap-16 items-center max-w-5xl mx-auto w-full px-4">
+    <div>
+      <p class="text-sm uppercase tracking-[0.25em] text-brand dark:text-brand-night font-semibold mb-4">Contacto</p>
+      <h2 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-ink dark:text-mist leading-[0.95] tracking-tight mb-6">
+        Hablemos<span class="text-brand dark:text-signal">.</span>
+      </h2>
+      <p class="text-ink-soft dark:text-mist-soft text-lg max-w-sm mb-8">
+        ¿Tienes un proyecto o una propuesta? Escríbeme y te respondo a la brevedad.
+      </p>
+
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-3">
+        <a href={`mailto:${email}`} class="group inline-flex items-center gap-3 text-xl sm:text-2xl font-semibold text-ink dark:text-mist">
+          <span class="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_2px] bg-left-bottom bg-no-repeat group-hover:bg-[length:100%_2px] transition-[background-size] duration-300 pb-1 break-all">{email}</span>
+          <span class="text-brand dark:text-brand-night transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true">↗</span>
+        </a>
+        <button
+          type="button"
+          id="copy-email"
+          data-email={email}
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium text-ink-soft dark:text-mist-soft border border-line dark:border-night-line-strong hover:text-brand dark:hover:text-brand-night hover:border-brand dark:hover:border-brand-night transition-colors"
+          aria-label="Copiar email al portapapeles"
+        >
+          <svg data-icon="copy" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <svg data-icon="check" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          <span data-label>Copiar</span>
+        </button>
+      </div>
+      <p id="copy-status" class="sr-only" aria-live="polite"></p>
+    </div>
+
+    <ul class="border-t border-line dark:border-night-line-strong">
+      {links.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group flex items-center justify-between py-5 md:py-6 border-b border-line dark:border-night-line-strong"
+          >
+            <span>
+              <span class="block text-xl md:text-2xl font-semibold text-ink dark:text-mist group-hover:text-brand dark:group-hover:text-brand-night transition-colors">{link.label}</span>
+              <span class="block text-sm text-ink-muted dark:text-mist-muted">{link.value}</span>
+            </span>
+            <span class="text-2xl text-ink-muted dark:text-mist-muted group-hover:text-brand dark:group-hover:text-brand-night transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true">↗</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <footer class="pt-8 text-center text-sm text-ink-muted dark:text-mist-muted">
+    © {year} Ian Redzio · Buenos Aires, Argentina
+  </footer>
+</section>
+
+<script>
+  const button = document.getElementById('copy-email');
+  const status = document.getElementById('copy-status');
+
+  if (button) {
+    const label = button.querySelector<HTMLElement>('[data-label]');
+    const copyIcon = button.querySelector('[data-icon="copy"]');
+    const checkIcon = button.querySelector('[data-icon="check"]');
+    let resetTimer: number | undefined;
+
+    button.addEventListener('click', async () => {
+      const email = button.dataset.email ?? '';
+      try {
+        await navigator.clipboard.writeText(email);
+      } catch {
+        // Alternativa para navegadores sin Clipboard API o contextos no seguros
+        const input = document.createElement('textarea');
+        input.value = email;
+        input.style.position = 'fixed';
+        input.style.opacity = '0';
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        input.remove();
+      }
+
+      if (label) label.textContent = '¡Copiado!';
+      copyIcon?.classList.add('hidden');
+      checkIcon?.classList.remove('hidden');
+      if (status) status.textContent = 'Email copiado al portapapeles';
+
+      window.clearTimeout(resetTimer);
+      resetTimer = window.setTimeout(() => {
+        if (label) label.textContent = 'Copiar';
+        copyIcon?.classList.remove('hidden');
+        checkIcon?.classList.add('hidden');
+        if (status) status.textContent = '';
+      }, 2000);
+    });
+  }
+</script>
