@@ -1,0 +1,24 @@
+---
+interface Props {
+  title: string;
+  company: string;
+  period: string;
+  description: string;
+  skills: string[];
+}
+
+const { title, company, period, description, skills } = Astro.props;
+---
+
+<li class="group grid grid-cols-1 md:grid-cols-[12rem_minmax(0,1fr)] gap-1 md:gap-8 py-4 md:py-5 border-b border-line dark:border-night-line-strong">
+  <p class="font-mono text-sm text-ink-muted dark:text-mist-muted md:pt-1">{period}</p>
+  <div>
+    <h3 class="text-lg md:text-xl font-semibold text-ink dark:text-mist leading-tight">
+      {title} <span class="text-brand dark:text-brand-night">· {company}</span>
+    </h3>
+    <p class="text-ink-soft dark:text-mist-soft text-base mt-1 mb-3 leading-relaxed">{description}</p>
+    <ul class="flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs text-ink-muted dark:text-mist-muted" aria-label="Tecnologías">
+      {skills.map((skill) => <li>{skill}</li>)}
+    </ul>
+  </div>
+</li>
