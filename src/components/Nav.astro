@@ -17,15 +17,15 @@ const menuItems: MenuItem[] = [
 <!-- Skip to main content link para accesibilidad -->
 <a
   href="#main-container"
-  class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-brand focus:text-white focus:rounded-lg focus:shadow-lg dark:focus:bg-blue-600"
+  class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-brand focus:text-brand-contrast focus:rounded-lg focus:shadow-lg dark:focus:bg-brand-night dark:focus:text-night"
 >
   Saltar al contenido principal
 </a>
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-paper/90 dark:bg-[#0E0E29]/90 backdrop-blur-sm h-[var(--nav-height)] border-b border-line dark:border-night-line">
+<header class="fixed top-0 left-0 right-0 z-50 bg-paper/90 dark:bg-night/90 backdrop-blur-sm h-[var(--nav-height)] border-b border-line dark:border-night-line">
   <nav class="w-full h-full flex items-center px-4 lg:px-8">
     <div class="max-w-5xl mx-auto w-full flex justify-between md:justify-end items-center gap-8">
-      <button id="mobile-menu-button" class="md:hidden text-ink dark:text-mist focus:outline-none z-50 p-3 rounded-lg hover:bg-paper-sunk dark:hover:bg-white/10 min-h-[48px] min-w-[48px] flex items-center justify-center" aria-label="Abrir menú">
+      <button id="mobile-menu-button" class="md:hidden text-ink dark:text-mist focus:outline-none z-50 p-3 rounded-lg hover:bg-paper-sunk dark:hover:bg-night-raised min-h-[48px] min-w-[48px] flex items-center justify-center" aria-label="Abrir menú">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
@@ -50,7 +50,7 @@ const menuItems: MenuItem[] = [
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Descargar CV"
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-brand bg-paper-raised dark:bg-[#0E0E29] text-brand dark:text-brand-night font-medium shadow-sm hover:bg-brand-tint dark:hover:bg-brand-night-tint transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 dark:focus:ring-offset-night dark:border-brand-night dark:focus:ring-brand-night"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-brand bg-paper-raised dark:bg-night text-brand dark:text-brand-night font-medium shadow-sm hover:bg-brand-tint dark:hover:bg-brand-night-tint transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 dark:focus:ring-offset-night dark:border-brand-night dark:focus:ring-brand-night"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -61,14 +61,14 @@ const menuItems: MenuItem[] = [
       
       <button 
         id="theme-toggle" 
-        class="relative p-2.5 rounded-xl bg-paper-sunk dark:bg-white/10 hover:bg-line dark:hover:bg-white/20 transition-all duration-300 group focus:ring-2 focus:ring-brand focus:ring-offset-2 dark:focus:ring-offset-night dark:focus:ring-brand-night" 
+        class="relative p-2.5 rounded-xl bg-paper-sunk dark:bg-night-raised hover:bg-line dark:hover:bg-night-line transition-all duration-300 group focus:ring-2 focus:ring-brand focus:ring-offset-2 dark:focus:ring-offset-night dark:focus:ring-brand-night" 
         aria-label="Alternar tema"
         title="Cambiar tema"
       >
         <svg 
           id="sun-icon" 
           xmlns="http://www.w3.org/2000/svg" 
-          class="h-5 w-5 text-yellow-500 dark:block hidden transition-all duration-500 group-hover:rotate-180 group-hover:scale-110" 
+          class="h-5 w-5 text-signal dark:block hidden transition-all duration-500 group-hover:rotate-180 group-hover:scale-110" 
           fill="none" 
           viewBox="0 0 24 24" 
           stroke="currentColor"
@@ -87,17 +87,17 @@ const menuItems: MenuItem[] = [
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
         </svg>
         
-        <div id="theme-loading" class="absolute inset-0 rounded-xl bg-blue-500/20 opacity-0 transition-opacity duration-200"></div>
+        <div id="theme-loading" class="absolute inset-0 rounded-xl bg-brand/20 opacity-0 transition-opacity duration-200"></div>
       </button>
     </div>
   </nav>
 </header>
 
-<div id="mobile-menu" class="fixed inset-0 bg-paper/95 dark:bg-[#0E0E29]/95 backdrop-blur-lg md:hidden opacity-0 pointer-events-none z-[1000]">
+<div id="mobile-menu" class="fixed inset-0 bg-paper dark:bg-night md:hidden opacity-0 pointer-events-none z-[1000]">
   <div id="menu-overlay" class="absolute inset-0 w-full h-full"></div>
   
   <div class="flex flex-col h-full relative z-10">
-    <button id="close-menu-button" class="absolute top-4 right-4 text-ink dark:text-mist p-3 focus:outline-none rounded-lg hover:bg-paper-sunk dark:hover:bg-white/10 min-h-[48px] min-w-[48px] flex items-center justify-center" aria-label="Cerrar menú">
+    <button id="close-menu-button" class="absolute top-4 right-4 text-ink dark:text-mist p-3 focus:outline-none rounded-lg hover:bg-paper-sunk dark:hover:bg-night-raised min-h-[48px] min-w-[48px] flex items-center justify-center" aria-label="Cerrar menú">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
@@ -120,7 +120,7 @@ const menuItems: MenuItem[] = [
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Descargar CV"
-        class="inline-flex items-center gap-3 px-8 py-4 mt-6 rounded-lg border-2 border-brand bg-paper-raised dark:bg-[#0E0E29] text-brand dark:text-brand-night font-semibold shadow-lg hover:bg-brand-tint dark:hover:bg-brand-night-tint transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 dark:focus:ring-offset-night text-xl min-h-[56px] dark:border-brand-night dark:focus:ring-brand-night"
+        class="inline-flex items-center gap-3 px-8 py-4 mt-6 rounded-lg border-2 border-brand bg-paper-raised dark:bg-night text-brand dark:text-brand-night font-semibold shadow-lg hover:bg-brand-tint dark:hover:bg-brand-night-tint transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 dark:focus:ring-offset-night text-xl min-h-[56px] dark:border-brand-night dark:focus:ring-brand-night"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -317,17 +317,15 @@ const menuItems: MenuItem[] = [
     transform: translateX(-50%);
     width: 0;
     height: 2px;
-    background-color: #3B82F6;
+    background-color: theme('colors.brand.DEFAULT');
     transition: width 0.3s ease;
   }
   
   .dark .mobile-nav-link:after {
-    background-color: #55c1ff;
+    background-color: theme('colors.brand.night');
   }
   
-  .mobile-nav-link:hover:after,
-  .mobile-nav-link.text-gray-900:after,
-  .mobile-nav-link.dark\:text-white:after {
+  .mobile-nav-link:hover:after {
     width: 60%;
   }
   

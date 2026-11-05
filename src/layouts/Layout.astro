@@ -1,6 +1,14 @@
 ---
+// Fuentes servidas desde el propio sitio (sin Google Fonts):
+// Bricolage Grotesque para títulos, IBM Plex Sans para texto corrido
+// e IBM Plex Mono para datos (fechas, etiquetas).
+import '@fontsource-variable/bricolage-grotesque/opsz.css';
+import '@fontsource/ibm-plex-sans/latin-400.css';
+import '@fontsource/ibm-plex-sans/latin-500.css';
+import '@fontsource/ibm-plex-sans/latin-600.css';
+import '@fontsource/ibm-plex-mono/latin-400.css';
+import '@fontsource/ibm-plex-mono/latin-500.css';
 import '../styles/global.css';
-import AnimatedBackground from '../components/AnimatedBackground.astro';
 
 interface Props {
 	title?: string;
@@ -40,7 +48,8 @@ const personSchema = {
     <title>{title}</title>
     <link rel="canonical" href={canonicalUrl} />
     <link rel="sitemap" href="/sitemap.xml" />
-    <meta name="theme-color" content="#0E0E29" />
+    <meta name="theme-color" content="#0E0E29" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#EEF0F6" media="(prefers-color-scheme: light)" />
 
     <!-- Open Graph: vista previa al compartir en LinkedIn, WhatsApp, etc. -->
     <meta property="og:type" content="website" />
@@ -61,45 +70,18 @@ const personSchema = {
     <meta name="twitter:image" content={imageUrl} />
 
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <script>
+    <!-- is:inline: se ejecuta antes de pintar, sin parpadeo de tema -->
+    <script is:inline>
       (function() {
-        const getSystemTheme = () => {
-          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        };
-        
-        const savedTheme = localStorage.getItem('theme');
-        const systemTheme = getSystemTheme();
-        const theme = savedTheme && (savedTheme === 'dark' || savedTheme === 'light') 
-          ? savedTheme 
-          : 'dark'; 
-        
-        const html = document.documentElement;
-        if (theme === 'dark') {
-          html.classList.add('dark');
-        } else {
-          html.classList.remove('dark');
-        }
-        
-        if (!savedTheme) {
-          localStorage.setItem('theme', theme);
-        }
+        // Sin elección guardada, se respeta la preferencia del sistema:
+        // el modo oscuro es una decisión del visitante, no un default fijo.
+        let savedTheme = null;
+        try { savedTheme = localStorage.getItem('theme'); } catch (e) {}
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const theme = savedTheme === 'dark' || savedTheme === 'light' ? savedTheme : systemTheme;
+        document.documentElement.classList.toggle('dark', theme === 'dark');
       })();
     </script>
-    <style>
-      :root {
-        --color-primary: #0E0E29;
-        --color-primary-dark: #080818;
-      }
-      
-      body {
-        font-family: 'Inter', sans-serif;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo(0, 0);
@@ -109,7 +91,6 @@ const personSchema = {
     </script>
   </head>
   <body>
-    <AnimatedBackground />
     <slot />
   </body>
 </html>

@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Títulos con la tipografía de display; el resto usa la neutra (font-sans) */
+@layer base {
+  h1, h2, h3 {
+    font-family: theme('fontFamily.display');
+    letter-spacing: -0.02em;
+  }
+}
+
 @layer utilities {
   .line-clamp-3 {
     display: -webkit-box;
@@ -61,7 +69,7 @@
 :root { 
   --color-primary: #0E0E29;
   --color-primary-dark: #080818;
-  --color-accent: #8B9CFF;
+  --color-accent: #9DABFF;
   --color-highlight: #F5C451;
   --color-text: #ECEDF7;
   --color-text-secondary: #B8BAD4;
@@ -78,7 +86,7 @@ html:not(.dark) {
 }
 
 ::selection {
-  background-color: rgba(139, 156, 255, 0.3);
+  background-color: rgba(157, 171, 255, 0.3);
   color: var(--color-text);
 }
 
@@ -110,7 +118,7 @@ html {
 body {
   background-color: var(--color-primary);
   color: var(--color-text);
-  font-family: 'Inter', sans-serif;
+  font-family: theme('fontFamily.sans');
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -192,7 +200,6 @@ a:focus-visible {
   transform: translateY(-100%);
   transition: opacity 0.3s ease-in-out, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   background-color: var(--color-primary);
-  backdrop-filter: blur(8px);
 }
 
 #mobile-menu.opacity-100 {

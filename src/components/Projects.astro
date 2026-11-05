@@ -7,6 +7,8 @@ interface Project {
   tags: string[];
   url: string;
   code: string;
+  // El proyecto destacado se muestra grande; el resto, en lista
+  featured?: boolean;
 }
 
 const projects: Project[] = [
@@ -32,7 +34,8 @@ const projects: Project[] = [
     image: "/images/LeagueOfLegendsWeb.png",
     tags: ["React", "JavaScript", "HTML", "CSS", "Vite"],
     url: "https://league-of-legends-three.vercel.app/",
-    code: "https://github.com/IannRedzio/league_of_legends_app"
+    code: "https://github.com/IannRedzio/league_of_legends_app",
+    featured: true
   },
   {
     title: "Portfolio Personal",
@@ -43,103 +46,98 @@ const projects: Project[] = [
     code: "https://github.com/IannRedzio/portfolio2.0"
   }
 ];
+
+const featured = projects.find((p) => p.featured) ?? projects[0];
+const others = projects.filter((p) => p !== featured);
+const imgSrc = (image: any) => (typeof image === 'string' ? image : image.src);
 ---
 
 <section class="content-container smooth-transition py-2 md:py-6">
-  <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-ink dark:text-mist text-center mb-2 sm:mb-4">
-    <span class="border-b-2 border-brand dark:border-brand-night pb-1">Proyectos destacados</span>
-  </h2>
-  
-  <div class="max-w-7xl mx-auto overflow-x-hidden overflow-y-auto max-h-[calc(100vh-var(--nav-height)-5rem)] md:max-h-none px-2 sm:px-3 md:px-4">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {projects.map(project => (
-        <div class="bg-paper-raised/75 dark:bg-night-raised/60 backdrop-blur-sm rounded-lg border border-line dark:border-night-line overflow-hidden flex flex-col h-80 sm:h-[290px] md:h-[320px] xl:h-[360px] card-shadow hover:card-shadow-hover hover:translate-y-[-4px] transition-all duration-300 group">
-          <div class="h-24 sm:h-20 md:h-28 xl:h-32 bg-paper-sunk dark:bg-gray-800 overflow-hidden">
-            <img
-              src={typeof project.image === 'string' ? project.image : project.image.src}
-              alt={`Miniatura de ${project.title}`}
-              loading="lazy"
-              decoding="async"
-              class="w-full h-full object-cover opacity-90 hover:opacity-100 group-hover:scale-105 transition-all duration-300"
-            />
-          </div>
-          
-          <div class="p-4 sm:p-3 md:p-4 flex-1 flex flex-col justify-between">
-            <div>
-              <h3 class="text-sm sm:text-base md:text-base lg:text-lg font-bold text-ink dark:text-mist mb-3 sm:mb-1 md:mb-2 group-hover:text-brand dark:group-hover:text-brand-night transition-colors leading-tight">{project.title}</h3>
+  <div class="px-4">
+    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-ink dark:text-mist mb-4 md:mb-6">
+      <span class="border-b-2 border-brand dark:border-brand-night pb-1">Proyectos destacados</span>
+    </h2>
 
-              <p class="text-ink-soft dark:text-mist-soft text-xs sm:text-sm md:text-sm line-clamp-3 sm:line-clamp-2 md:line-clamp-3 mb-4 sm:mb-1 md:mb-2 leading-relaxed">
-                {project.description}
-              </p>
-            </div>
-            
-            <div class="mt-auto">
-              <div class="flex flex-wrap gap-2 sm:gap-1 md:gap-1.5 mb-4 sm:mb-2 md:mb-3">
-                {project.tags.map((tag, index) => (
-                  <span 
-                    class={`
-                      text-xs sm:text-[9px] md:text-xs 
-                      px-2 sm:px-1.5 md:px-2 py-1 sm:py-0.5 
-                      bg-transparent text-ink-soft dark:text-mist-soft rounded-full
-                      border border-line dark:border-night-line-strong
-                      hover:bg-paper-sunk dark:hover:bg-white/5 hover:scale-105 transition-all duration-200
-                      ${index >= 2 ? 'hidden lg:inline-block' : ''}
-                      ${index >= 3 ? 'lg:hidden' : ''}
-                    `}
-                  >
-                    {tag}
-                  </span>
-                ))}
-                
-                {project.tags.length > 2 && (
-                  <span class="text-xs sm:text-[9px] md:text-xs px-2 py-1 text-ink-muted dark:text-mist-muted lg:hidden">
-                    +{project.tags.length - 2}
-                  </span>
-                )}
-                
-                {project.tags.length > 3 && (
-                  <span class="text-xs sm:text-[9px] md:text-xs px-2 py-1 text-ink-muted dark:text-mist-muted hidden lg:inline-block">
-                    +{project.tags.length - 3}
-                  </span>
-                )}
-              </div>
-              
-              <div class="flex gap-2 sm:gap-2 flex-wrap">
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2 sm:gap-1.5 px-4 py-3 sm:px-3 sm:py-2 md:px-3 md:py-2 bg-brand hover:bg-brand-hover text-white text-sm sm:text-[10px] md:text-xs font-medium rounded-lg transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 dark:focus:ring-offset-night min-h-[48px] md:min-h-auto dark:bg-brand-night dark:text-night dark:hover:bg-brand-night-hover dark:focus:ring-brand-night"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-3.5 sm:w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                  Ver proyecto
-                </a>
-
-                <a
-                  href={project.code}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2 sm:gap-1.5 px-4 py-3 sm:px-3 sm:py-2 md:px-3 md:py-2 bg-transparent hover:bg-paper-sunk border border-line-strong dark:border-night-line-strong dark:bg-transparent dark:hover:bg-white/5 text-ink dark:text-mist text-sm sm:text-[10px] md:text-xs font-medium rounded-lg transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 dark:focus:ring-offset-night min-h-[48px] md:min-h-auto"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-3.5 sm:w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                  </svg>
-                  Ver código
-                </a>
-              </div>
-            </div>
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] gap-6 lg:gap-10 items-start">
+      <!-- Proyecto destacado: imagen grande -->
+      <article class="group">
+        <a href={featured.url} target="_blank" rel="noopener noreferrer" class="block overflow-hidden rounded-xl border border-line dark:border-night-line bg-paper-sunk dark:bg-night-line aspect-[16/9]" aria-label={`Ver ${featured.title}`}>
+          <img
+            src={imgSrc(featured.image)}
+            alt={`Captura de ${featured.title}`}
+            loading="lazy"
+            decoding="async"
+            data-project-img
+            class="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
+          />
+        </a>
+        <div class="mt-4">
+          <h3 class="text-xl md:text-2xl font-bold text-ink dark:text-mist leading-tight">{featured.title}</h3>
+          <p class="text-ink-soft dark:text-mist-soft text-base mt-2 mb-3 leading-relaxed max-w-xl">{featured.description}</p>
+          <ul class="flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs text-ink-muted dark:text-mist-muted mb-4" aria-label="Tecnologías">
+            {featured.tags.map((tag) => <li>{tag}</li>)}
+          </ul>
+          <div class="flex gap-2 flex-wrap">
+            <a
+              href={featured.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand hover:bg-brand-hover text-brand-contrast text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 dark:focus:ring-offset-night min-h-[44px] dark:bg-brand-night dark:text-night dark:hover:bg-brand-night-hover dark:focus:ring-brand-night"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              Ver proyecto
+            </a>
+            <a
+              href={featured.code}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-4 py-2.5 bg-transparent hover:bg-paper-sunk dark:hover:bg-night-raised border border-line-strong dark:border-night-line-strong text-ink dark:text-mist text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-line-strong focus:ring-offset-2 dark:focus:ring-offset-night min-h-[44px]"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+              Ver código
+            </a>
           </div>
         </div>
-      ))}
+      </article>
+
+      <!-- Resto de proyectos: lista compacta -->
+      <ul class="border-t border-line dark:border-night-line-strong">
+        {others.map((project) => (
+          <li class="group flex gap-4 py-4 border-b border-line dark:border-night-line-strong">
+            <a href={project.url} target="_blank" rel="noopener noreferrer" class="shrink-0 self-start w-24 sm:w-28 aspect-[4/3] overflow-hidden rounded-md border border-line dark:border-night-line bg-paper-sunk dark:bg-night-line" tabindex="-1" aria-hidden="true">
+              <img
+                src={imgSrc(project.image)}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                data-project-img
+                class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+              />
+            </a>
+            <div class="min-w-0 flex-1">
+              <h3 class="text-base md:text-lg font-semibold text-ink dark:text-mist leading-tight">
+                <a href={project.url} target="_blank" rel="noopener noreferrer" class="hover:text-brand dark:hover:text-brand-night transition-colors">{project.title}</a>
+              </h3>
+              <p class="text-ink-soft dark:text-mist-soft text-sm mt-1 line-clamp-2 leading-relaxed">{project.description}</p>
+              <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-xs">
+                <span class="font-mono text-ink-muted dark:text-mist-muted">{project.tags.join(' · ')}</span>
+                <a href={project.code} target="_blank" rel="noopener noreferrer" class="font-medium text-brand dark:text-brand-night hover:underline underline-offset-4">Código ↗</a>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   </div>
 </section>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const projectImages = document.querySelectorAll('.grid img');
+    const projectImages = document.querySelectorAll('[data-project-img]');
     projectImages.forEach(img => {
       img.addEventListener('error', () => {
         (img as HTMLImageElement).src = '/images/placeholder.svg';
@@ -147,5 +145,3 @@ const projects: Project[] = [
     });
   });
 </script>
-
- 
