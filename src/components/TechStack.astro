@@ -1,70 +1,95 @@
 ---
-import { 
-  siHtml5, 
-  siCss3, 
-  siJavascript, 
-  siTypescript, 
-  siNodedotjs, 
-  siExpress, 
-  siPostgresql, 
+import {
+  siTypescript,
+  siJavascript,
+  siReact,
+  siAstro,
+  siTailwindcss,
+  siHtml5,
+  siCss3,
+  siNodedotjs,
+  siNestjs,
+  siExpress,
+  siPostgresql,
   siSequelize,
-  siReact, 
-  siAstro, 
-  siTailwindcss, 
-  siGit, 
-  siGithub, 
-  siDocker 
+  siAmazonwebservices,
+  siDocker,
+  siGit,
+  siGithub,
 } from 'simple-icons';
 
-const allTechs = [
-  { name: "HTML", icon: siHtml5, color: "#E34F26" },
-  { name: "CSS", icon: siCss3, color: "#1572B6" },
-  { name: "JavaScript", icon: siJavascript, color: "#F7DF1E" },
-  { name: "TypeScript", icon: siTypescript, color: "#3178C6" },
-  { name: "Node.js", icon: siNodedotjs, color: "#339933" },
-  { name: "Express", icon: siExpress, color: null },
-  { name: "PostgreSQL", icon: siPostgresql, color: "#4169E1" },
-  { name: "Sequelize", icon: siSequelize, color: "#52B0E7" },
-  { name: "React", icon: siReact, color: "#61DAFB" },
-  { name: "Astro", icon: siAstro, color: "#FF5D01" },
-  { name: "Tailwind", icon: siTailwindcss, color: "#06B6D4" },
-  { name: "Git", icon: siGit, color: "#F05032" },
-  { name: "GitHub", icon: siGithub, color: null },
-  { name: "Docker", icon: siDocker, color: "#2496ED" }
+// color: color de marca que toma el ícono al pasar el mouse (null = color del texto)
+const groups = [
+  {
+    area: 'Lenguajes',
+    items: [
+      { name: 'TypeScript', icon: siTypescript, color: '#3178C6' },
+      { name: 'JavaScript', icon: siJavascript, color: '#F7DF1E' },
+    ],
+  },
+  {
+    area: 'Frontend',
+    items: [
+      { name: 'React', icon: siReact, color: '#61DAFB' },
+      { name: 'Astro', icon: siAstro, color: '#FF5D01' },
+      { name: 'Tailwind', icon: siTailwindcss, color: '#06B6D4' },
+      { name: 'HTML', icon: siHtml5, color: '#E34F26' },
+      { name: 'CSS', icon: siCss3, color: '#1572B6' },
+    ],
+  },
+  {
+    area: 'Backend',
+    items: [
+      { name: 'Node.js', icon: siNodedotjs, color: '#339933' },
+      { name: 'NestJS', icon: siNestjs, color: '#E0234E' },
+      { name: 'Express', icon: siExpress, color: null },
+      { name: 'PostgreSQL', icon: siPostgresql, color: '#4169E1' },
+      { name: 'Sequelize', icon: siSequelize, color: '#52B0E7' },
+    ],
+  },
+  {
+    area: 'Cloud y herramientas',
+    items: [
+      // Naranja de AWS: el azul oficial (#232F3E) no se ve sobre fondo oscuro
+      { name: 'AWS', icon: siAmazonwebservices, color: '#FF9900' },
+      { name: 'Docker', icon: siDocker, color: '#2496ED' },
+      { name: 'Git', icon: siGit, color: '#F05032' },
+      { name: 'GitHub', icon: siGithub, color: null },
+    ],
+  },
 ];
 ---
 
 <section class="content-container smooth-transition py-4 sm:py-6 md:py-10">
   <div class="px-4">
-    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-ink dark:text-mist mb-6 md:mb-8">
+    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-ink dark:text-mist mb-8 md:mb-10">
       <span class="border-b-2 border-brand dark:border-brand-night pb-1">Tecnologías y herramientas que uso</span>
     </h2>
 
-    <div class="max-w-3xl bg-paper-raised dark:bg-night-raised rounded-xl p-4 sm:p-6 md:p-8 border border-line dark:border-night-line card-shadow hover:card-shadow-hover hover:translate-y-[-2px] transition-all duration-300">
-      <div class="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-4 justify-items-center">
-        {allTechs.map(tech => (
-          <div class="flex flex-col items-center p-2 rounded-lg hover:bg-paper-sunk dark:hover:bg-night-line transition-all duration-200 w-16 h-18 sm:w-20 sm:h-20 md:w-[75px] md:h-[75px] justify-center hover:scale-110 cursor-pointer group">
-            <div 
-              class:list={["w-8 h-8 sm:w-10 sm:h-10 md:w-8 md:h-8 mb-2 flex items-center justify-center group-hover:scale-110 transition-transform duration-200", !tech.color && "text-ink dark:text-mist"]}
-              style={tech.color ? `color: ${tech.color}` : undefined}
-            >
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width="100%" 
-                height="100%" 
-                viewBox="0 0 24 24" 
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path d={tech.icon.path} />
-              </svg>
-            </div>
-            <span class="text-ink dark:text-mist text-xs sm:text-xs font-medium text-center group-hover:text-brand dark:group-hover:text-brand-night transition-colors leading-tight">{tech.name}</span>
-          </div>
-        ))}
-      </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 pt-3">
+      {groups.map((group) => (
+        <div>
+          <h3 class="font-mono text-xs uppercase tracking-[0.2em] font-normal text-brand dark:text-brand-night mb-3">
+            {group.area} <span class="text-ink-muted dark:text-mist-muted">/ {String(group.items.length).padStart(2, '0')}</span>
+          </h3>
+          <ul class="border-t border-line dark:border-night-line-strong">
+            {group.items.map((tech) => (
+              <li class="group flex items-center gap-3 py-3 border-b border-line dark:border-night-line-strong">
+                <svg
+                  class="w-5 h-5 shrink-0 text-ink-muted dark:text-mist-muted group-hover:text-[var(--brand-color)] transition-colors duration-200"
+                  style={`--brand-color: ${tech.color ?? 'currentColor'}`}
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d={tech.icon.path} />
+                </svg>
+                <span class="text-lg font-medium text-ink dark:text-mist">{tech.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   </div>
 </section>
-
- 
