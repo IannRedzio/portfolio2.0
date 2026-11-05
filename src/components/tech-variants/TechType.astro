@@ -1,0 +1,28 @@
+---
+// Variante B: tipográfica, los nombres en grande como texto corrido
+import { groups } from './data';
+---
+
+<section class="content-container py-4 sm:py-6 md:py-10">
+  <div class="px-4 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,2.4fr)] gap-6 lg:gap-12 items-start">
+    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-ink dark:text-mist">
+      <span class="border-b-2 border-brand dark:border-brand-night pb-1">Tecnologías</span>
+    </h2>
+
+    <dl class="space-y-6 md:space-y-8">
+      {groups.map((group) => (
+        <div class="grid grid-cols-1 sm:grid-cols-[9rem_minmax(0,1fr)] gap-1 sm:gap-6 items-baseline">
+          <dt class="font-mono text-xs uppercase tracking-[0.2em] text-ink-muted dark:text-mist-muted">{group.area}</dt>
+          <dd class="font-display text-2xl sm:text-3xl lg:text-4xl font-semibold leading-snug tracking-tight text-ink dark:text-mist">
+            {group.items.map((tech, i) => (
+              <>
+                <span class="hover:text-brand dark:hover:text-brand-night transition-colors">{tech.name}</span>
+                {i < group.items.length - 1 && <span class="text-line-strong dark:text-night-line-strong font-normal" aria-hidden="true"> / </span>}
+              </>
+            ))}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>

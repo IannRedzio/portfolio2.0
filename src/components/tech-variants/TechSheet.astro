@@ -1,0 +1,28 @@
+---
+// Variante C: tabla de íconos a todo el ancho con líneas finas, el área como encabezado de fila
+import { groups } from './data';
+---
+
+<section class="content-container py-4 sm:py-6 md:py-10">
+  <div class="px-4">
+    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-ink dark:text-mist mb-8 md:mb-10">
+      <span class="border-b-2 border-brand dark:border-brand-night pb-1">Tecnologías y herramientas que uso</span>
+    </h2>
+
+    <div class="border-t border-line dark:border-night-line-strong">
+      {groups.map((group) => (
+        <div class="grid grid-cols-1 md:grid-cols-[10rem_minmax(0,1fr)] border-b border-line dark:border-night-line-strong">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-ink-muted dark:text-mist-muted py-4 md:py-0 md:self-center">{group.area}</p>
+          <ul class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 md:border-l border-line dark:border-night-line-strong">
+            {group.items.map((tech) => (
+              <li class="group flex flex-col items-center justify-center gap-2 py-5 border-r border-line dark:border-night-line-strong last:border-r-0 lg:last:border-r">
+                <svg class="w-7 h-7 text-ink dark:text-mist group-hover:text-[var(--c)] group-hover:-translate-y-0.5 transition-all duration-200" style={`--c: ${tech.color ?? 'currentColor'}`} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={tech.icon.path} /></svg>
+                <span class="font-mono text-xs text-ink-soft dark:text-mist-soft">{tech.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
