@@ -10,9 +10,9 @@ Portfolio personal desarrollado con **Astro** y **Tailwind CSS**, presentando mi
 
 ## ✨ Características
 
-- 🌌 **Fondo animado**: auroras de color que se desplazan lentamente, grilla en movimiento, brillo que sigue al cursor y textura de grano. Solo anima `transform`/`opacity` y se detiene con `prefers-reduced-motion`
+- 🔤 **Tipografía propia**: Bricolage Grotesque para títulos, IBM Plex Sans para texto e IBM Plex Mono para datos, servidas desde el sitio (sin Google Fonts)
 - 🖱️ **Navegación por secciones**: scroll a pantalla completa con rueda del mouse, swipe en móviles y menú con indicador de sección activa
-- 🌓 **Modo oscuro/claro**: paletas derivadas del mismo navy de marca, con la preferencia guardada en `localStorage` (arranca en oscuro)
+- 🌓 **Modo oscuro/claro**: paletas derivadas del mismo navy de marca; sigue la preferencia del sistema y guarda la elección manual en `localStorage`. En oscuro, todo el texto supera un contraste de 7:1
 - ⌨️ **Efecto de escritura** en la presentación del hero
 - 📱 **Diseño responsivo**: optimizado para móvil, tablet y desktop, con alturas `dvh` para las barras dinámicas de los navegadores móviles
 - ♿ **Accesibilidad**: link para saltar al contenido, focus visibles, `aria-label`, cierre del menú con `Esc` y movimiento reducido
@@ -27,6 +27,7 @@ Portfolio personal desarrollado con **Astro** y **Tailwind CSS**, presentando mi
 - **[Tailwind CSS](https://tailwindcss.com/)**: estilos utility-first
 - **[TypeScript](https://www.typescriptlang.org/)**: tipado en componentes y scripts
 - **[Simple Icons](https://simpleicons.org/)**: íconos SVG de tecnologías
+- **[Fontsource](https://fontsource.org/)**: fuentes autoalojadas
 
 ## 📦 Instalación
 
@@ -60,7 +61,6 @@ El sitio queda disponible en `http://localhost:4321`.
 ├── docs/                        # Imágenes usadas solo en este README
 └── src/
     ├── components/
-    │   ├── AnimatedBackground.astro   # Fondo animado
     │   ├── Nav.astro                  # Navegación, menú móvil y cambio de tema
     │   ├── Hero.astro                 # Presentación
     │   ├── Experience.astro           # Datos de experiencia laboral
@@ -78,7 +78,8 @@ El sitio queda disponible en `http://localhost:4321`.
 
 - **Experiencia, proyectos y tecnologías**: editar los arrays al inicio de `Experience.astro`, `Projects.astro` y `TechStack.astro`.
 - **Colores**: la paleta está en `tailwind.config.mjs` (`paper`, `ink`, `brand`, `night`, `mist`, `signal`).
-- **Fondo animado**: la intensidad de cada aurora se ajusta con las variables `--aurora-*` en `AnimatedBackground.astro`.
+- **Tipografías**: se importan en `Layout.astro` y se nombran en `fontFamily` (`sans`, `display`, `mono`) de `tailwind.config.mjs`.
+- **Proyecto destacado**: marcar con `featured: true` en `Projects.astro` el que se muestra en grande.
 - **CV**: reemplazar el PDF en `public/` y actualizar el link en `Nav.astro` y `Contact.astro`.
 - **Dominio**: si cambia la URL del sitio, actualizar `site` en `astro.config.mjs`, `public/robots.txt` y `public/sitemap.xml`.
 
